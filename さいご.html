@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html onload="kekka();" lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>結果発表</title>
+</head>
+<body>
+    <h1>結果発表！！！！！</h1>
+    <script>
+        function reset(){
+            sessionStorage.score = 0;
+            location="問題1.html";
+        }
+
+        document.write("<h1>正解数は" + sessionStorage.score + "問です</h1>");
+        if(sessionStorage.score == 8){
+            document.write("<p>全問正解おめでとう！！</p>");
+        }else{
+            document.write("<p>残念！またやろう！！</p>");
+        }
+    </script>
+
+    <button onclick="reset();">もう一度！！</button>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+<title>クイズ3</title>
+<script>
+function correct(){
+alert("正解！！")
+sessionStorage.sukoa++;
+location="問題4.html"
+}
+function incorrect(){
+alert("不正解！")
+location="問題4.html"
+}
+</script>
+</head>
+<body>
+<h1>第三問！！</h1>
+<p>クリスマスは何の日と言われている❓</p>
+<button onclick="correct()";>イエスキリストの誕生日</button>
+<button onclick="incorrect()";>クリスマスはクリスマス</button>
+<button onclick="incorrect()";>プレゼントをもらうためだけの日</button>
+</body>
+</html>

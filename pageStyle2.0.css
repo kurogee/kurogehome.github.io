@@ -1,0 +1,94 @@
+ul > li {
+    list-style-type: none;
+}
+
+body {
+    background-image: url("image/haikei.webp");
+    background-color: mediumseagreen;
+    background-attachment: fixed;
+    color:black;
+    height:100%;
+}
+
+html {
+    height: 100%;
+    z-index: 99999;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    list-style-position: inside;
+    overflow-wrap: break-word;
+}
+
+.menu {
+    position: fixed;
+    z-index: 99999;
+}
+
+.menu img {
+    width: 70px;
+    height: 70px;
+    height: calc(100% / 12);
+    display: block;
+}
+
+.e {
+    width:60px;
+    height:60px;
+}
+
+#ueicon{
+    border-style: inset;
+    border-color: aquamarine;
+    border-width: 8px;
+    border-radius: 50px;
+}
+
+#ueicon:hover {
+    border-color: aqua;
+}
+
+.img{
+    width:70px;
+    height:70px;
+}
+
+#honbun{
+    position: relative;
+    left: 100px;
+    width: 95%;
+}
+
+#new::after{
+    content:" new ";
+    color:red;
+}
+
+#download::after {
+    content:url("./image/download.webp");
+}
+
+#box, .box {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 5px inset #333333;
+    border-radius: 50px 10px;
+    background-color: lightgreen;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#flex_list {
+    display: flex;
+}
+
+#flex_list > li {
+    width: 50%;
+}
+
+#box:hover, .box:hover {
+    border-color: #000;
+}
+
+hr {
+    width: 80%;
+}

@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="kurogehomeは@kuroge_が運営するホームページです！技術的なことを多く発信しているのでぜひ見ていってください！">
+    <link rel="icon" type="image/webp" href="image/icon.webp">
+    <link rel="stylesheet" href="pageStyle2.0.css">
+    <title>色々検索</title>
+</head>
+<body>
+    <div class="menu">
+        <a href="./index.html"><img src="image/トップ.webp" id="ueicon"></a>
+        <a href="./my.html"><img src="image/my.webp" id="ueicon"></a>
+        <a href="./web.html"><img src="image/サーチ.webp" id="ueicon"></a>
+        <a href="./program.html"><img src="image/プログラム.webp" id="ueicon"></a>
+        <a href="./uranai.html"><img src="image/占い.webp" id="ueicon"></a>
+        <a href="./scratch/project/kakutou/index.html"><img src="image/kakutou.webp" id="ueicon"></a>
+    </div>
+    <div id="honbun">
+        <div id="box">
+            <h1>色々検索「Smart」</h1>
+        </div>
+
+        <div id="box">
+            <!--google検索-->
+            <form method="get" action="http://www.google.co.jp/search" target="_blank">
+                <div class="searchArea" id="makeImg">
+                    <input type="text" id="inText" class="searchText" name="q" value="" placeholder="google">
+                    <div class="searchButton">
+                        <input type="image" src="image/kensaku.webp" class="searchImg" name="btng" value="検索">
+                    </div>
+                    <input type="hidden" name="hl" value="ja">
+                </div>
+            </form><br><br>
+
+            <!--bing検索-->
+            <form method="get" action="https://www.bing.com/search?q=" target="_blank">
+                <div class="searchArea" id="makeImg">
+                    <input type="text" id="inText" class="searchText" name="q" value="" placeholder="BING">
+                    <div class="searchButton">
+                        <input type="image" src="image/kensaku.webp" class="searchImg" name="btng" value="検索">
+                    </div>
+                    <input type="hidden" name="hl" value="ja">
+                </div>
+            </form><br><br>
+
+            <!--youtube検索-->
+            <form method="get" action="https://www.youtube.com/results?search_query=" target="_blank">
+                <div class="searchArea" id="makeImg">
+                    <input type="text" id="inText" class="searchText" name="q" value="" placeholder="youtube">
+                    <div class="searchButton">
+                        <input type="image" src="image/kensaku.webp" class="searchImg" name="btng" value="検索">
+                    </div>
+                    <input type="hidden" name="hl" value="ja">
+                </div>
+            </form><br><br>
+
+            <!--scratch検索-->
+            <form method="get" action="https://scratch.mit.edu/search/projects?q=" target="_blank">
+                <div class="searchArea" id="makeImg">
+                    <input type="text" id="inText" class="searchText" name="q" value="" placeholder="scratch">
+                    <div class="searchButton">
+                        <input type="image" src="image/kensaku.webp" class="searchImg" name="btng" value="検索">
+                    </div>
+                    <input type="hidden" name="hl" value="ja">
+                </div>
+            </form><br><br>
+
+            <!--duckduckgo検索-->
+            <form method="get" action="https://duckduckgo.com/?q=" target="_blank">
+                <div class="searchArea" id="makeImg">
+                    <input type="text" id="inText" class="searchText" name="q" value="" placeholder="duckduckgo">
+                    <div class="searchButton">
+                        <input type="image" src="image/kensaku.webp" class="searchImg" name="btng" value="検索">
+                    </div>
+                    <input type="hidden" name="hl" value="">
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <style>
+        /*検索窓のCSSここから*/
+        /* --- 検索全体のBOX (サンプル用)--- */
+        .searchArea{
+            width          : 290px;              /* BOXの幅               */
+            height         : 40px;               /* BOXの高さ             */
+            margin         : auto;               /* サンプルを中心に寄せ  */
+            letter-spacing : 0.1em;              /* 文字間隔              */
+            font-weight    : bold;               /* 太字                  */
+            line-height    : 0;                  /* 標準の行高さ          */
+        }
+        /* --- テキスト入力欄のSTYLE設定 --- */
+        .searchArea .searchText {
+            display        : block;              /* ブロック化            */
+            float          : left;               /* 横並び                */
+            box-sizing     : border-box;         /* 枠線,余白を含んだ長さ */
+            height         : 40px;               /* 入力の高さ            */
+            width          : 240px;              /* 入力の幅              */
+            margin         : 0;                  /* 外余白                */
+            padding        : 0 20px;             /* 内余白                */
+            border         : 2px solid #007fff;  /* 枠線　幅,実践,色      */
+            border-radius  : 20px 0 0 20px;      /* 左上下の角丸          */
+            color          : #333;               /* 文字色                */
+            outline        : 0;                  /* 入力の薄い枠を非表示  */
+            font-size      : 28px;               /* フォントサイズ        */
+        }
+        /* --- 検索ボタン欄のSTYLE設定 --- */
+        .searchArea .searchButton {
+            float          : left;               /* 横並び                */
+            box-sizing     : border-box;         /* 枠線,余白を含んだ長さ */
+            height         : 40px;               /* 入力の高さ            */
+            margin         : 0;                  /* 外余白                */
+            padding        : 6px 10px;           /* 内余白                */
+            border         : none;               /* 枠線　幅,実践,色      */
+            border-radius  : 0 20px 20px 0;      /* 右上下の角丸          */
+            background     : #007fff;            /* ボタンの色            */
+            color          : #fff;               /* 文字色                */
+            cursor         : pointer;            /* カーソル設定          */
+            line-height    : 28px;               /* 1行の高さ             */
+            font-size      : 28px;               /* フォントサイズ        */
+        }
+        /* --- 検索ボタン欄にフォーカスか来たとき --- */
+        .searchArea .searchText:focus {
+            background     : #cfe7ff;            /* フォーカス時の背景色  */
+        }
+        /* --- 検索ボタン内のアイコンSTYLE設定 --- */
+        .searchArea .searchImg {
+            display        : inline-block;       /* インラインブロック化  */
+            width          : auto;               /* 幅は高さに合わせる    */
+            height         : 28px;               /* 画像の高さ            */
+            margin         : 0 3px 0 0;          /* 余白                  */
+            vertical-align : middle;             /* 横の文字位置          */
+        }
+        /*検索窓のCSSここまで*/
+    </style>
+
+    <script src="cookie.js"></script>
+    <script src="date.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+<title>クイズ7</title>
+<script>
+function correct(){
+alert("正解！！")
+sessionStorage.sukoa++;
+location="問題8.html"
+}
+function incorrect(){
+alert("不正解！")
+location="問題8.html"
+}
+</script>
+</head>
+<body>
+<h1>第七問！！</h1>
+<p>日本の中心は？</p>
+<button onclick="incorrect()">山梨県甲府市</button>
+<button onclick="correct()">長野県辰野町</button>
+<button onclick="incorrect()">東京都新宿区</button>
+</body>
+</html>

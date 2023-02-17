@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+<title>クイズ6</title>
+<script>
+function kuizu6(){
+answer=prompt("ばばばばばばば")
+if(answer=="バナナ"||answer=="ばなな"||answer=="banana"){
+alert("正解！！")
+sessionStorage.sukoa++;
+location="問題7.html"
+}else{
+alert("不正解！")
+location="問題7.html"
+}
+}
+</script>
+</head>
+<body>
+<h1>第六問！！</h1>
+<p>ばばばばばばば　これ、何？</p>
+<button onclick="kuizu6();">答えを入力！！</button>
+</body>
+</html>

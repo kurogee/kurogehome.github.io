@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="kurogehomeは@kuroge_が運営するホームページです！技術的なことを多く発信しているのでぜひ見ていってください！">
+    <link rel="icon" type="image/webp" href="image/icon.webp">
+    <link rel="stylesheet" href="pageStyle2.0.css">
+    <title>占い</title>
+</head>
+<script>
+    function mikuji(){
+        aitemu = [
+                    "時計",
+                    "財布",
+                    "100円",
+                    "ペン",
+                    "ハンカチ",
+                    "携帯電話",
+                    "歯ブラシ",
+                    "ひざ掛けタオル",
+                    "タオルケット",
+                    "チョコレート",
+                    "小物入れ",
+                    "お守り",
+                    "懐中電灯",
+                    "鍵",
+                    "漫画",
+                    "マグカップ",
+                    "小説",
+                    "ノート",
+                    "グミ",
+                    "キーホルダー",
+                    "ラジカセ",
+                    "テレビ",
+                    "DVD映画",
+                    "絵画",
+                    "眼鏡",
+                    "音楽CD",
+                    "カーテン",
+                    "はしご",
+                    "座布団",
+                    "ポイントカード",
+                    "マグネット",
+                    "ハサミ",
+                    "のり",
+                    "色鉛筆",
+                    "マイバッグ",
+                    "段ボール",
+                    "商品券",
+                    "保証書",
+                    "扇風機",
+                    "充電器",
+                    "辞書",
+                    "グラス",
+                    "ヘアゴム",
+                    "指輪",
+                    "家族の写真",
+                    "メモ帳",
+                    "飲料水",
+                    "ペットボトル",
+                    "ハンコ",
+                    "栄養ドリンク",
+                    "クッション",
+                    "縫いぐるみ",
+                    "割り箸",
+                    "地図",
+                    "ティッシュ",
+                    "サランラップ",
+                    "ランプ",
+                    "電卓",
+                    "5円",
+                    "昔の写真",
+                    "延長コード",
+                    "新聞",
+                    "流行りの雑誌",
+                    "ポケットティッシュ",
+                    "クッキーの空き缶",
+                    "ホッチキス",
+                    "つまようじ",
+                    "カレンダー",
+                    "レジ袋",
+                    "飴玉",
+                    "ポリ袋",
+                    "裏紙",
+                    "Ｓ字フック",
+                    "ハンガー",
+                    "観賞植物",
+                    "水筒",
+                    "電卓",
+                    "目覚まし時計",
+                    "ジョウロ",
+                    "付箋",
+                    "手紙セット",
+                    "手袋",
+                    "除菌スプレー",
+                    "虫除けスプレー",
+                    "折りたたみ傘",
+                    "傘",
+                    "消しゴム",
+                    "鉛筆",
+                    "万年筆",
+                    "多機能グッズ",
+                    "缶ジュース",
+                    "辞典",
+                    "予備バッテリー",
+                    "ワンセグ",
+                    "派手な靴下",
+                    "カメラ",
+                    "紐",
+                    "輪ゴム",
+                    "ちょっと派手な物",
+                    "革バッグ",
+                    "手帳",
+                    "缶コーヒー",
+                    "予備の○○",
+                    "筆ペン",
+                    "ボールペン",
+                    "腕時計",
+                    "思い出の写真",
+                    "名刺",
+                    "携帯スプーン",
+                    "替えのマスク",
+                    "ラジオ",
+                    "孫の手",
+                    "LEDライト",
+                    "携帯用消毒液"
+        ];
+
+        kara = [
+                "赤",
+                "青",
+                "黄",
+                "緑",
+                "黄緑",
+                "水",
+                "空",
+                "オレンジ",
+                "橙",
+                "コバルトブルー",
+                "ピンク",
+                "白",
+                "灰",
+                "茶",
+                "深緑",
+                "金",
+                "銀",
+                "ベージュ",
+                "紺",
+                "紫",
+                "ねずみ",
+                "もも",
+                "赤茶",
+                "若草",
+                "黄土",
+                "うす橙",
+                "紅",
+                "レモン",
+                "エメラルドグリーン",
+                "瑠璃",
+                "スカイブルー",
+                "朱",
+                "臙脂",
+                "桜",
+                "サンゴ",
+                "マリンブルー",
+                "牡丹",
+                "ローズ",
+                "草",
+                "青緑",
+                "ミントグリーン",
+                "肌",
+                "杏",
+                "タンポポ",
+                "山吹",
+                "ゴールデンイエロー",
+                "ピーチ",
+                "青紫",
+                "菖蒲",
+                "焦げ茶",
+                "海老茶",
+                "錆",
+                "レンガ",
+                "セピア",
+                "砂",
+                "鉄黒",
+                "チョコレート",
+                "カーキー",
+                "セピア",
+                "抹茶",
+                "栗",
+                "柿"
+        ];
+
+        
+        x1=parseInt(Math.random() * 100)+1
+        kekka=document.getElementById("kenkou")
+        kekka.innerHTML="<h3>今日の健康運> "+x1+"/100%</h3>"
+
+        x2=parseInt(Math.random() * 100)+1
+        kekka=document.getElementById("kin")
+        kekka.innerHTML="<h3>今日の金運> "+x2+"/100%</h3>"
+
+        x3=parseInt(Math.random() * 100)+1
+        kekka=document.getElementById("undou")
+        kekka.innerHTML="<h3>今日の運動運> "+x3+"/100%</h3>"
+
+        x4=parseInt(Math.random() * 100)+1
+        sigoto=document.getElementById("sigoto")
+        kekka.innerHTML="<h3>今日の仕事運> "+x4+"/100%</h3>"
+
+        x=parseInt(Math.random() * aitemu.length)
+        kekka=aitemu[x]
+        rakki=document.getElementById("rakki")
+        rakki.innerHTML="<h3>ラッキーアイテム："+kekka+"</h3>"
+
+        x=parseInt(Math.random() * kara.length)
+        kekka=kara[x]
+        kara=document.getElementById("kara")
+        kara.innerHTML="<h3>ラッキーカラー："+kekka+"色</h3>"
+
+        revel=document.getElementById("revel")
+        point=x1+x2+x3
+        if(point >= 1 && point <= 90){
+            revel.innerHTML="<h3>総合ランク：E</h3>"
+        }else if(point >= 91 && point <= 120){
+            revel.innerHTML="<h3>総合ランク：D</h3>"
+        }else if(point >= 121 && point <= 235){
+            revel.innerHTML="<h3>総合ランク：C</h3>"
+        }else if(point >= 236 && point <= 270){
+            revel.innerHTML="<h3>総合ランク：B</h3>"
+        }else if(point >= 271 && point <= 299){
+            revel.innerHTML="<h3>総合ランク：A</h3>"
+        }else if(point == 300){
+            revel.innerHTML="<h3>総合ランク：S (ﾈ申)</h3>"
+        }
+    }
+</script>
+</head>
+    <body>
+    <div class="menu">
+        <a href="./index.html"><img src="image/トップ.webp" id="ueicon"></a>
+        <a href="./my.html"><img src="image/my.webp" id="ueicon"></a>
+        <a href="./web.html"><img src="image/サーチ.webp" id="ueicon"></a>
+        <a href="./program.html"><img src="image/プログラム.webp" id="ueicon"></a>
+        <a href="./uranai.html"><img src="image/占い.webp" id="ueicon"></a>
+        <a href="./scratch/project/kakutou/index.html"><img src="image/kakutou.webp" id="ueicon"></a>
+    </div>
+    <div id="honbun">
+        <div id="box" class="uranai">
+            <h1>占い</h1>
+
+            <div class="botan">
+                <button class="btn" onclick="mikuji();"><h1>うらなう！</h1></button>
+            </div>
+
+            <br>
+
+            <div id="kenkou"></div>
+            <div id="kin"></div>
+            <div id="undou"></div>
+            <div id="sigoto"></div>
+            <div id="rakki"></div>
+            <div id="kara"></div>
+            <div id="revel"></div>
+
+            <br>
+            <p>（占いは、あくまでも参考です。）</p>
+            </div>
+    </div>
+    <style>
+        .uranai * {
+            margin-left: auto;
+            margin-right: auto;
+            text-align:center;
+        }
+
+        button{
+            border:inset;
+            border-width:8px;
+            border-color:lightblue;
+            transition: 1.0s;
+            background-color:#ee4545;
+        }
+
+        button:hover{
+            background-color:orange;
+        }
+    </style>
+
+    <script src="cookie.js"></script>
+    <script src="date.js"></script>
+</body>
+</html>
