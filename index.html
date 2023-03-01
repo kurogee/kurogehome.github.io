@@ -120,16 +120,15 @@
 
         if (getParam("s") == "from_old_site") {
             let special = document.getElementsByClassName("special");
-            special[0].insertAdjacentHTML("beforebegin", `<h2>お知らせ</h2>
+            special[0].innerHTML = `<h2>お知らせ</h2>
             <h3>
                 kurogehomeのサイトURLが変わりました<br>
                 新しいURLは「http://kurogehome.f5.si」です<br>
                 引き続きよろしくおねがいします<br><br>
                 <p>これは、旧サイト(http://kurogehome.dokkoisho.com)から飛んできた人にのみ表示されます。</p>
             </h3>
-            <hr>`);
+            <hr>` + special[0].innerHTML;
         }
     </script>
 </body>
 </html>
-
