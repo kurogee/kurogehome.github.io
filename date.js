@@ -352,16 +352,25 @@ const anniversary = [
     [12, 30, "地下鉄記念日"]
 ];
 
+const urls = "index.html";
+const new_site_url = "http://kurogehome.f5.si/index.html";
+
 let output = document.getElementById("date");
 let hiduke = new Date;
 let year = hiduke.getFullYear(hiduke);
 let month = hiduke.getMonth(hiduke) + 1;
 let date = hiduke.getDate(hiduke);
 
-output.innerHTML = `${year}年 / ${month}月 / ${date}日`;
-for (let i = 0; i < anniversary.length; i++) {
-    if (month == anniversary[i][0] && date == anniversary[i][1]) {
-        output.innerHTML += ` - ${anniversary[i][2]}<br>`;
-        break;
+if (location.href.match(urls)) {
+    output.innerHTML = `${year}年 / ${month}月 / ${date}日`;
+    for (let i = 0; i < anniversary.length; i++) {
+        if (month == anniversary[i][0] && date == anniversary[i][1]) {
+            output.innerHTML += ` - ${anniversary[i][2]}<br>`;
+            break;
+        }
     }
+}
+
+if (! location.href.match("kurogehome.f5.si")) {
+    location.href = new_site_url + "?s=from_old_site";
 }
