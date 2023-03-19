@@ -22,8 +22,17 @@
     <div id="honbun">
         <div id="box">
             <h2>会員ページ登録</h2>
-            <p>登録が完了したら、自動的にログインページに飛びます<br>
-                自分の合言葉を変えるには手続きが必要なので<em>確実</em>に入力してください</p>
+            <p>
+                あいことばというのは、パスワードのようなものです。<br>
+                ですがセキュリティで保護されていないので、いつも使っているものではないフレーズを設定してください。
+            </p>
+            <p>
+                登録が完了したら、自動的にログインページに飛びます<br>
+                自分の合言葉を変えるには手続きが必要なので<em>確実</em>に入力してください
+            </p>
+            
+            <hr>
+
             <h3>
                 <form>
                     ID: <input type="text" name="id" id="user_id"><br>
@@ -83,6 +92,14 @@
                 states.innerHTML = "エラー: あいことばもIDも入力してください";
             }
             
+        }
+
+        window.onkeydown = (e) => {
+            e.preventDefault();
+        }
+
+        document.getElementsByTagName('html')[0].oncontextmenu = () => {
+            return false;
         }
     </script>
 </body>
