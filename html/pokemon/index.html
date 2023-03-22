@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="kurogehomeは@kuroge_が運営するホームページです！技術的なことを多く発信しているのでぜひ見ていってください！">
+        <link rel="icon" type="image/webp" href="../../image/icon.webp">
+        <link rel="stylesheet" href="../../pageStyle2.0.css">
+        <title>ポケモン体重・サイズ検索</title>
+    </head>
+    <body>
+        <div class="menu">
+            <a href="../../index.html"><img src="../../image/トップ.webp" id="ueicon" alt="index"></a>
+            <a href="../../my.html"><img src="../../image/my.webp" id="ueicon" alt="about me"></a>
+            <a href="../../web.html"><img src="../../image/サーチ.webp" id="ueicon" alt="search"></a>
+            <a href="../../program.html"><img src="../../image/プログラム.webp" id="ueicon" alt="programs"></a>
+            <a href="../../uranai.html"><img src="../../image/占い.webp" id="ueicon" alt="divination"></a>
+            <a href="../../scratch/project/kakutou/index.html"><img src="../../image/kakutou.webp" id="ueicon" alt="Kakutou Game"></a>
+        </div>
+
+        <div id="honbun">
+            <div id="box">
+                <h2>ポケモン体重・サイズ計算</h2>
+                <p>
+                    ポケモン体重・サイズ計算ができます！(〜SVまで)
+                </p>
+                <h3>
+                    サイズ (単位: m): <input type="text" id="size"><br>
+                    体重 (単位: kg): <input type="text" id="weight"><br><br>
+                    サイズの許容範囲 (単位: m): <input type="text" id="size_t"><br>
+                    体重の許容範囲 (単位: kg): <input type="text" id="weight_t"><br><br>
+                    <button onclick="enter();">　　決定　　</button>
+                </h3>
+                <hr>
+                <h2>〜結果〜</h2>
+                <h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>体重が当てはまる</th>
+                                <th>サイズが当てはまる</th>
+                                <th>両方当てはまる</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="weight_r" valign="top"></td>
+                                <td id="size_r" valign="top"></td>
+                                <td id="all_r" valign="top"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </h3>
+            </div>
+        </div>
+        
+        <style>
+            #box {
+                text-align: center;
+                margin-right: auto;
+                margin-left: auto;
+            }
+
+            table {
+                width: 100%;
+            }
+
+            td {
+                border: 1px solid black;
+            }
+
+            thead {
+                border: 3px double black;
+            }
+
+            thead * {
+                background-color: silver;
+                color: black;
+            }
+        </style>
+        <script src="./system.js"></script>
+        <script>
+            document.getElementsByTagName('html')[0].oncontextmenu = () => {
+                return false;
+            }
+        </script>
+    </body>
+</html>
