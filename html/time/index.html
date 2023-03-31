@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>now time</title>
+        <meta charset="utf-8" />
+        <script>
+        </script>
+    </head>
+    <body>
+        <div id="date"></div>
+        <div id="time"></div>
+        <div id="countdown"></div>
+
+        <script>
+            function time_reload() {
+                let daylist = ["日","月","火","水","木","金","土"];
+
+                let now = new Date();
+                let year = now.getFullYear();
+                let month = now.getMonth() + 1;
+                let date = now.getDate();
+                let day = daylist[now.getDay()];
+                let h = now.getHours();
+                let m = now.getMinutes();
+                let s = now.getSeconds();
+                let ima = (34 - month - date + 6) % 6 - 1;
+                
+                document.getElementById("date").innerHTML = year+"/"+month+"/"+date+"("+day+")";
+                document.getElementById("time").innerHTML = h+":"+m+":"+s;
+                let ato = (year + 1) + "年元旦 まで" + (12 - month) + "ヶ月" + (31 - date) + "日" + (23 - h) + "時間"+ (m - 59) + "分" + (s - 60) + "秒"
+                document.getElementById("countdown").innerHTML = ato;
+            }
+
+            function time_start() {
+                time_reload();
+                window.setInterval(() => {
+                    time_reload();
+                }, 1000);
+            }
+            
+            window.onload = () => {
+                time_start();
+            }
+            
+        </script>
+
+        <style>
+            :root{
+                --main-color:whitesmoke;
+                --size:100%;
+            }
+            html,body{
+                font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                background-color: black;
+                color:var(--main-color);
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 10;
+                left: 0;
+                margin: auto;
+                width: 100%;
+                height: 15rem;
+                text-align: center;
+            }
+            #rokuyo{
+                font-size:x-large;
+            }
+            #date{
+                font-size: 100px;
+                letter-spacing: 5px;
+            }
+            #time{
+                font-size:100px;
+                letter-spacing: 5px;
+            }
+            #countdown{
+                font-size: large;
+            }
+            button{
+                background-color: black;
+                color:white;
+            }
+        </style>
+    </body>
+</html>
