@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>数式</title>
+    </head>
+    <body>
+        <div id="marks">
+            <p class="mark"></p>
+            <p class="mark"></p>
+            <p class="mark"></p>
+            <p class="mark"></p>
+            <p class="mark"></p>
+        </div>
+        <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+              extensions: ["tex2jax.js"],
+              jax: ["input/TeX", "output/HTML-CSS"],
+              tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                processEscapes: true
+              },
+              "HTML-CSS": {
+                availableFonts: ["TeX"]
+              }
+            });
+        </script>
+        <script src="system.js"></script>
+        <style>
+            * {
+                text-align: center;
+                margin-right: auto;
+                margin-left: auto;
+            }
+
+            #marks > .mark {
+                float: left;
+                margin-left: 100px;
+            }
+        </style>
+    </body>
+</html>
