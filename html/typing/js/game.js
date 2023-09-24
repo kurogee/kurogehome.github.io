@@ -164,6 +164,33 @@ const words = [
     ["Do I have to call him?", "私は彼に電話しなければなりませんか？"],
     ["To use computer is fun.", "コンピュータを使うことは楽しいです。"],
     ["Is it fun to play games?", "ゲームをするのは楽しいですか？"],
+    ["I know another countries' cultures.", "私は他の国の文化を知っています。"],
+    ["It's my first overseas trip.", "これは私の初めての海外旅行です。"],
+    ["I have many schedules tomorrow.", "私は明日たくさんの予定があります。"],
+    ["According to this graph,", "このグラフによると、"],
+    ["If you feel sorry for me, give me money!", "同情するなら金をくれ。"],
+    ["I often drink coffee.", "私はよくコーヒーを飲みます。"],
+    ["I always get up at 6.", "私はいつも6時に起きます。"],
+    ["He tries to learn English.", "彼は英語を学ぼうとしています。"],
+    ["If it's sunny tomorrow, I'll go to the park.", "明日晴れたら、私は公園に行きます。"],
+    ["When I was 10 years old, I lived in Kyoto.", "私が10歳の時、私は京都に住んでいました。"],
+    ["I wonder if he is smart.", "彼は頭がいいのかな。"],
+    ["Following humanrights is important.", "人権を守ることは重要です。"],
+    ["I studied English to pass the Eiken test.", "私は英検に合格するために英語を勉強しました。"],
+    ["What do you do?", "あなたは何をしていますか？"],
+    ["You're right.", "あなたは正しいです。"],
+    ["I left my pen at home.", "私は家にペンを置き忘れました。"],
+    ["Can I borrow your pen?", "あなたのペンを借りてもいいですか？"],
+    ["He brought some toys.", "彼はいくつかのおもちゃを持ってきました。"],
+    ["She is 13 years old.", "彼女は13歳です。"],
+    ["You look tired.", "あなたは疲れて見えます。"],
+    ["What's wrong?", "どうしたのですか？"],
+    ["I have a headache.", "頭痛がします。"],
+    ["I have a stomachache.", "お腹が痛いです。"],
+    ["She has to do her homework.", "彼女は宿題をしなければなりません。"],
+    ["He doesn't have to meet her.", "彼は彼女に会う必要はありません。"],
+    ["People call it the Great Wall.", "人々はそれを万里の長城と呼んでいます。"],
+    ["We went there on my foot.", "私たちはそこに歩いて行きました。"],
 ].map(w => { return {"word" : w[0], "mean" : w[1]} });
 
 const sound = new Audio("./key_sound.mp3");
@@ -200,7 +227,7 @@ function time_up() {
         komoji_only = document.getElementById("komoji_only").checked;
     });
     odai.removeEventListener("keypress", event => get_key(event));
-    time.innerHTML = ` - 終了 - <br>総タイプ数: ${correct_type + mistype}<br>正しい入力数: ${correct_type}<br>ミスタイプ数: ${mistype}<br>正しいタイプ率: ${round(correct_type / (correct_type + mistype) * 100)}%<br>平均タイプ速度: 約${round((correct_type + mistype) / now_time * 60)}回/分`;
+    time.innerHTML = ` - 終了 - <br>総タイプ数: ${correct_type + mistype}<br>正しい入力数: ${correct_type}<br>ミスタイプ数: ${mistype}<br>正しいタイプ率: ${round(correct_type / (correct_type + mistype) * 100)}%<br>平均タイプ速度: 約${round((correct_type + mistype) / now_time)}回/秒`;
 }
 
 function get_key(e) {
