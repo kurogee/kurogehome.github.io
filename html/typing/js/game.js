@@ -21,7 +21,7 @@ const words = [
     ["I practice English at home.", "私は家で英語を練習します。"],
     ["How do you come to school?", "あなたはどうやって学校に来ますか？"],
     ["By bus.", "バスで。"],
-    ["On my foot.", "歩いて。"],
+    ["On foot.", "歩いて。"],
     ["By car.", "車で。"],
     ["How are you?", "お元気ですか？"],
     ["I'm fine, thank you.", "はい、元気です。"],
@@ -190,7 +190,7 @@ const words = [
     ["She has to do her homework.", "彼女は宿題をしなければなりません。"],
     ["He doesn't have to meet her.", "彼は彼女に会う必要はありません。"],
     ["People call it the Great Wall.", "人々はそれを万里の長城と呼んでいます。"],
-    ["We went there on our foot.", "私たちはそこに歩いて行きました。"],
+    ["We went there on foot.", "私たちはそこに歩いて行きました。"],
 ].map(w => { return {"word" : w[0], "mean" : w[1]} });
 
 const sound = new Audio("./key_sound.mp3");
