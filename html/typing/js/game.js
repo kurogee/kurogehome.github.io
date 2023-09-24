@@ -139,7 +139,7 @@ const words = [
     ["Yes, I can.", "はい、できます。"],
     ["No, I can't.", "いいえ、できません。"],
     ["Don't worry.", "心配しないで。"],
-    ["My pen in on the desk.", "私のペンは机の上にあります。"],
+    ["My pen is on the desk.", "私のペンは机の上にあります。"],
     ["I visited the museum to see many interesting things.", "私は多くの面白いものを見るために博物館を訪れました。"],
     ["Maybe you can get ideas there.", "おそらくあなたはそこでアイデアを得ることができます。"],
     ["I got it.", "わかりました。"],
@@ -161,27 +161,64 @@ const words = [
     ["What did you have for breakfast?", "あなたは朝食に何を食べましたか？"],
     ["I had a sandwich.", "私はサンドイッチを食べました。"],
     ["These are theirs.", "これらは彼らのものです。"],
-    
+    ["Do I have to call him?", "私は彼に電話しなければなりませんか？"],
+    ["To use computer is fun.", "コンピュータを使うことは楽しいです。"],
+    ["Is it fun to play games?", "ゲームをするのは楽しいですか？"],
 ].map(w => { return {"word" : w[0], "mean" : w[1]} });
 
 const sound = new Audio("./key_sound.mp3");
 
 const question_length = words.length;
 let komoji_only = false;
-let select_word, now_word;
+let first_keydown = false;
+
+let select_word, now_word, interval;
 let question_number;
 let question_status = 0;
+let mistype = 0;
+let correct_type = 0;
 
 const odai = document.getElementById("odai_text");
 const mean = document.getElementById("mean");
+const time = document.getElementById("time");
+const time_to_calc = document.getElementById("time_to_calc");
+let now_time = 0;
 
 document.addEventListener("keypress", event => get_key(event));
+
 document.getElementById("komoji_only").addEventListener("change", () => {
     komoji_only = document.getElementById("komoji_only").checked;
 });
 
+// 少数第2位まで表示するように四捨五入
+function round(num) {
+    return Math.round(num * 100) / 100;
+}
+
+function time_up() {
+    document.getElementById("komoji_only").removeEventListener("change", () => {
+        komoji_only = document.getElementById("komoji_only").checked;
+    });
+    odai.removeEventListener("keypress", event => get_key(event));
+    time.innerHTML = ` - 終了 - <br>総タイプ数: ${correct_type + mistype}<br>正しい入力数: ${correct_type}<br>ミスタイプ数: ${mistype}<br>正しいタイプ率: ${round(correct_type / (correct_type + mistype) * 100)}%<br>平均タイプ速度: 約${round((correct_type + mistype) / now_time * 60)}回/分`;
+}
+
 function get_key(e) {
+    if (!first_keydown) {
+        first_keydown = true;
+        now_time = 0;
+        interval = setInterval(() => {
+            now_time += 0.1;
+            time.innerText = now_time.toFixed(1);
+            if (now_time >= parseInt(time_to_calc.value)) {
+                clearInterval(interval);
+                time_up();
+            }
+        }, 100);
+    }
+
     if (e.key == now_word.charAt(question_status) || (komoji_only && e.key == now_word.charAt(question_status).toLowerCase())) {
+        correct_type++;
         sound.currentTime = 0;
         sound.play();
 
@@ -192,6 +229,8 @@ function get_key(e) {
         } else {
             odai.innerHTML = "<span id='gray'>" + now_word.substring(0, question_status).replace(/ /g, "␣") + "</span>" + now_word[question_status].replace(/ /g, "␣") + now_word.substring(question_status + 1, now_word.length).replace(/ /g, "␣");
         }
+    } else {
+        mistype++;
     }
 }
 

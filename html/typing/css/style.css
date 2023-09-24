@@ -33,6 +33,10 @@ html, body {
     font-size: 18px;
 }
 
+#time {
+    font-size: 15px;
+}
+
 #gray {
     color: gray;
 }
