@@ -1,0 +1,38 @@
+
+* {
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+    font-family: "ubuntu" monospace;
+}
+
+html, body {
+    background-color: black;
+    color: white;
+}
+
+#box {
+    border: 3px solid white;
+    width: 90%;
+    height: 30%;
+}
+
+#title {
+    font-size: 50px;
+}
+
+#odai_text {
+    font-size: 30px;
+}
+
+#now_text {
+    font-size: 20px;
+}
+
+#mean {
+    font-size: 18px;
+}
+
+#gray {
+    color: gray;
+}
