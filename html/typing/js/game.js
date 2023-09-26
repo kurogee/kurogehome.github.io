@@ -191,7 +191,39 @@ const words = [
     ["He doesn't have to meet her.", "彼は彼女に会う必要はありません。"],
     ["People call it the Great Wall.", "人々はそれを万里の長城と呼んでいます。"],
     ["We went there on foot.", "私たちはそこに歩いて行きました。"],
+    ["My teacher told us about it.", "先生は私たちにそれについて話しました。"],
+    ["That is picture of mountain.", "あれは山の絵です。"],
+    ["Could you take our picture?", "私たちの写真を撮っていただけますか？"],
+    ["Bless you.", "お大事に。"],
+    ["It's quarter cents.", "15セントです。"],
+    ["You musn't forget my name.", "私の名前を忘れてはいけません。"],
+    ["Do you remember me?", "私を覚えていますか？"],
+    ["I mustn't run away...", "逃げちゃダメだ..."],
+    ["I punish you on behalf of the moon!", "月に代わってお仕置きよ！"],
+    ["Don't answer questions with questions!", "質問に質問で答えるな！"],
+    ["If we can meet someday, will you call me friend again?", "いつか会えたら、また友達と呼んでくれますか？"],
+    ["I'll choose. Please give up your dream and die.", "俺は選ぶぞ。夢を諦めて死んでくれ。"],
+    ["It's symbol for school.", "それは学校のシンボルです。"],
+    ["I eat dinner a lot.", "私は夕食をたくさん食べます。"],
+    ["I finished using bathroom.", "私は浴室を使い終わりました。"],
+    ["I enjoyed talking with my friend.", "私は友達と話すのを楽しみました。"],
+    ["He started to learn about computer.", "彼はコンピュータについて学び始めました。"],
+    ["How have you been keeping?", "お元気でしたか？"],
+    ["It's been a while.", "久しぶりですね。"],
+    ["Nice to see you again.", "またお会いできて嬉しいです。"],
 ].map(w => { return {"word" : w[0], "mean" : w[1]} });
+
+const change_sentence = [
+    ["It's", "it is"],
+    ["it's", "it is"],
+    ["'m", " am"],
+    ["'re", " are"],
+    ["'ll", " will"],
+    ["'ve", " have"],
+    ["'d", " would"],
+    ["can't", "can not"],
+    ["n't", " not"],
+].map(w => { return {"before" : w[0], "after" : w[1]} });
 
 const sound = new Audio("./key_sound.mp3");
 
@@ -199,8 +231,11 @@ const question_length = words.length;
 let komoji_only = false;
 let first_keydown = false;
 
-let select_word, now_word, interval;
+let select_word
+let now_word
+let interval;
 let question_number;
+// let shoryaku_check = false;
 let question_status = 0;
 let mistype = 0;
 let correct_type = 0;
@@ -216,6 +251,11 @@ document.addEventListener("keypress", event => get_key(event));
 document.getElementById("komoji_only").addEventListener("change", () => {
     komoji_only = document.getElementById("komoji_only").checked;
 });
+
+/* アポストロフィをなくす機能
+document.getElementById("no_shoryaku").addEventListener("change", () => {
+    shoryaku_check = document.getElementById("no_shoryaku").checked;
+});*/
 
 // 少数第2位まで表示するように四捨五入
 function round(num) {
@@ -266,6 +306,7 @@ function play_game() {
     question_status = 0;
 
     select_word = words[question_number];
+
     odai.innerText = select_word.word.replace(/ /g, "␣");
     mean.innerText = select_word.mean;
     now_word = select_word.word;
