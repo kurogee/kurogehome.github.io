@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>now time</title>
+        <title>デジタル時計</title>
         <meta charset="utf-8" />
         <script>
         </script>
@@ -10,26 +10,40 @@
         <div id="date"></div>
         <div id="time"></div>
         <div id="countdown"></div>
+
         <script>
-            const timer = 1000;
-            window.addEventListener('load',function(){
-                setInterval('location.reload()',timer);
-            });
-            var now = new Date();
-            var daylist = ["日","月","火","水","木","金","土"];
-            var year = now.getFullYear();
-            var month = now.getMonth() + 1;
-            var date = now.getDate();
-            var day = daylist[now.getDay()];
-            var h = now.getHours();
-            var m = now.getMinutes();
-            var s = now.getSeconds();
- 
-            document.getElementById("date").innerHTML = year+"/"+month+"/"+date+"("+day+")";
-            document.getElementById("time").innerHTML = h+":"+m+":"+s;
-            var ato = (year + 1)+"年元旦 まで"+(12 - month)+"ヶ月"+(31 - date)+"日"+(23 - h)+"時間"+(m - 59)+"分"+(s - 60)+"秒"
-            document.getElementById("countdown").innerHTML = ato;
+            function time_reload() {
+                let daylist = ["日","月","火","水","木","金","土"];
+
+                let now = new Date();
+                let year = now.getFullYear();
+                let month = now.getMonth() + 1;
+                let date = now.getDate();
+                let day = daylist[now.getDay()];
+                let h = now.getHours();
+                let m = now.getMinutes();
+                let s = now.getSeconds();
+                let ima = (34 - month - date + 6) % 6 - 1;
+                
+                document.getElementById("date").innerHTML = year+"/"+month+"/"+date+"("+day+")";
+                document.getElementById("time").innerHTML = h+":"+m+":"+s;
+                let ato = (year + 1) + "年元旦 まで" + (12 - month) + "ヶ月" + (31 - date) + "日" + (23 - h) + "時間"+ (m - 59) + "分" + (s - 60) + "秒"
+                document.getElementById("countdown").innerHTML = ato;
+            }
+
+            function time_start() {
+                time_reload();
+                window.setInterval(() => {
+                    time_reload();
+                }, 1000);
+            }
+            
+            window.onload = () => {
+                time_start();
+            }
+            
         </script>
+
         <style>
             :root{
                 --main-color:whitesmoke;
