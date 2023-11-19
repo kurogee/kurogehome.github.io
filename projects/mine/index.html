@@ -125,8 +125,6 @@
             function open_cell(x, y) {
                 if (gameover || flag_checked_map[y][x]) return;
             
-                check_cells[y][x] = true;
-                checked_count++;
                 if (board_cells[y][x] == -1) {
                     gameover = true;
                     gameover_action();
@@ -146,6 +144,9 @@
 
                     return;
                 }
+
+                check_cells[y][x] = true;
+                checked_count++;
             
                 if (board_cells[y][x] == 0) {
                     for (let cy = -1; cy <= 1; cy++) {
@@ -155,24 +156,24 @@
                                 if (x + cx < weight &&
                                     y + cy < height &&
                                     x + cx >= 0 &&
-                                    y + cy >= 0 &&
-                                    check_cells[cy + y][cx + x] == false) open_cell(x + cx, y + cy);
+                                    y + cy >= 0) {
+                                        if (check_cells[cy + y][cx + x] == false) {
+                                            open_cell(x + cx, y + cy);
+                                            console.log(check_cells[cy + y][cx + x])
+                                        }
+                                    }
                             }
                         }
                     }
-                } else {
-                    output_board(board_cells);
                 }
+                
+                output_board(board_cells);
             }
 
             function put_checkmark_to_mine(x, y) {
                 if (gameover || check_cells[y][x]) return;
             
-                if (flag_checked_map[y][x]) {
-                    flag_checked_map[y][x] = false;
-                } else {
-                    flag_checked_map[y][x] = true;
-                }
+                flag_checked_map[y][x] = !flag_checked_map[y][x];
                 output_board(board_cells);
             }
 
