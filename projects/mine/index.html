@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="ja">
     <head>
-        <title>タイピングゲーム</title>
+        <title>マインスイーパ</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="../../pagestyle.css">
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     </head>
     <body>
         <div id="box"><a href="../../index.html">Index</a> | <a href="../../projects/index.html">Projects</a> |  <a href="../../notification/index.html">Notification</a></div>
-        <p></p>
 
         <br>
         <div id="box">
@@ -97,7 +96,7 @@
                     x = 0;
                     line.forEach((cell) => {
                         if (check_cells[y][x]) {
-                            display.append(`<button class="button_for_mine white" value="${x},${y}">${cell == -1 ? "💣" : cell}</button>`);
+                            display.append(`<button class="button_for_mine white" value="${x},${y}">${cell == -1 ? "💣" : cell == 0 ? "　" : cell}</button>`);
                         } else {
                             display.append(`<button class="button_for_mine black" value="${x},${y}">${flag_checked_map[y][x] ? "🚩" : "　"}</button>`);
                         }
