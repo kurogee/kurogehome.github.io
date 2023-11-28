@@ -8,7 +8,6 @@ let clear = false;
 const empty_place = [Math.floor(Math.random() * 4), Math.floor(Math.random() * 4)];
 
 function check_number(cells) {
-    // 二次元配列を一次元配列に変換
     const finish = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15".split(",").map(Number);
     let mem = [];
     let num;
