@@ -3,6 +3,7 @@
     <head>
         <title>マインスイーパ</title>
         <meta charset="utf-8">
+        <link rel="shortcut icon" href="../../icon.webp" type="image/webp">
         <link rel="stylesheet" href="../../pagestyle.css">
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     </head>
@@ -19,6 +20,8 @@
             </div>
             <hr>
             <h3>ゲーム</h3>
+            横: <input type="number" id="width" value="15"> 縦: <input type="number" id="height" value="15"> 爆弾: <input type="number" id="bom" value="20">
+            <hr>
             <div class="display" id="box">
                 <br>
                 <button class="button" onclick="new_game();">　New Game　</button>
@@ -29,9 +32,9 @@
         </div>
 
         <script>
-            const weight = 15;
-            const height = 15;
-            const bom = 20;
+            let weight = 15;
+            let height = 15;
+            let bom = 20;
 
             let board_cells, check_cells, flag_checked_map;
             let gameover = false;
@@ -88,25 +91,25 @@
             function output_board(board) {
                 let x, y;
                 let display = $(".display");
-            
-                display.html("");
+                let html = "";
             
                 y = 0;
                 board.forEach((line) => {
                     x = 0;
                     line.forEach((cell) => {
                         if (check_cells[y][x]) {
-                            display.append(`<button class="button_for_mine white" value="${x},${y}">${cell == -1 ? "💣" : cell == 0 ? "　" : cell}</button>`);
+                            html += `<button class="button_for_mine white" value="${x},${y}">${cell == -1 ? "💣" : cell == 0 ? "　" : cell}</button>`;
                         } else {
-                            display.append(`<button class="button_for_mine black" value="${x},${y}">${flag_checked_map[y][x] ? "🚩" : "　"}</button>`);
+                            html += `<button class="button_for_mine black" value="${x},${y}">${flag_checked_map[y][x] ? "🚩" : "　"}</button>`;
                         }
                         x++;
                     });
                 
-                    display.append("<br>");
+                    html += "<br>";
                     y++;
                 });
             
+                display.html(html);
                 $(".status").text(`${checked_count} / ${weight * height - bom}`);
             }
 
@@ -119,6 +122,8 @@
             
                 output_board(board_cells);
                 $(".status").text("Game Over");
+                // create_point_code(Math.ceil(checked_count / (weight * height - bom) * 10));
+                // console.log(Math.ceil(checked_count / (weight * height - bom) * 10));
             }
 
             function open_cell(x, y) {
@@ -174,11 +179,17 @@
             function put_checkmark_to_mine(x, y) {
                 if (gameover || check_cells[y][x]) return;
             
+                console.log(flag_checked_map[y][x]);
                 flag_checked_map[y][x] = !flag_checked_map[y][x];
+            
                 output_board(board_cells);
             }
 
             function new_game() {
+                weight = parseInt($("#width").val());
+                height = parseInt($("#height").val());
+                bom = parseInt($("#bom").val());
+
                 [board_cells, check_cells] = put_mines();
                 console.log(board_cells);
                 output_board(board_cells);
@@ -193,15 +204,12 @@
                     e.preventDefault();
                 
                     let [x, y] = $(this).val().split(",").map((v) => parseInt(v));
-                    console.log(x, y);
                     put_checkmark_to_mine(x, y);
                 
                     return false;
                 });
             
                 $(document).on("click", ".button_for_mine", function() {
-                    console.log("click");
-                
                     let [x, y] = $(this).val().split(",").map((v) => parseInt(v));
                     open_cell(x, y);
                 });
@@ -219,7 +227,7 @@
                 color: #000;
                 font-size: 20px;
             }
-
+                    
             .black {
                 background-color: #000;
             }
