@@ -1,3 +1,5 @@
+const default_title = "地震情報取得ツール";
+
 async function get_earthquake_info() {
     const response = await fetch("https://api.p2pquake.net/v2/history?codes=551&limit=1")
     .then(response => response.json());
@@ -38,6 +40,13 @@ async function put_display() {
         each_places_scale.html(mem);
 
         map.attr("src", `https://maps.google.co.jp/maps?q=${info.latitude},${info.longitude}&z=8&output=embed`);
+
+        // ウインドウが非アクティブの時はタイトルを変更
+        if (document.hasFocus()) {
+            document.title = default_title;
+        } else {
+            document.title = "【最新情報】" + default_title;
+        }
     }
     
     console.log("updated");
