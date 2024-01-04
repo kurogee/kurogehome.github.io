@@ -42,7 +42,7 @@ async function put_display() {
         map.attr("src", `https://maps.google.co.jp/maps?q=${info.latitude},${info.longitude}&z=8&output=embed`);
 
         // ウインドウが非アクティブの時はタイトルを変更
-        if (document.hasFocus()) {
+        if (window.hasFocus()) {
             document.title = default_title;
         } else {
             document.title = "【最新情報】" + default_title;
@@ -62,6 +62,10 @@ document.getElementById("reload_time").addEventListener("change", function() {
     clearInterval(interval);
     interval = setInterval(put_display, parseInt($("#reload_time").val()) * 1000);
     console.log("changed");
+});
+
+window.addEventListener("focus", function() {
+    document.title = default_title;
 });
 
 onload = main;
