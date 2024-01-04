@@ -3,6 +3,7 @@
     <head>
         <title>地震情報取得ツール</title>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
         <link rel="stylesheet" href="../../pagestyle.css">
         <link rel="shortcut icon" href="../../icon.webp" type="image/webp">
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -15,20 +16,18 @@
         <div id="box">
             <br>
             更新頻度: 5秒 <input type="range" id="reload_time" min="5" max="20" value="7"> 20秒
-            <br>
+            <br><br>
             <div id="get_earthquake_info" class="box">
                 <p>時間: <span id="date">不明</span></p>
                 <p>場所: <span id="place">不明</span></p>
-                <iframe id="map"
-                    src=""
-                    frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+                <iframe id="map" src="" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
                 <p>マグニチュード: <span id="mag">不明</span></p>
                 <p>深さ: <span id="depth">不明</span></p>
                 <hr>
                 <p>
-                    ・場所別震度・<br>
-                    <small>赤字は最大震度</small><br>
-                    <span id="each_places_scale">＞ 不明</span>
+                    ・場所別震度（最大震度は赤色）・<br>
+                    <span id="each_places_scale">不明</span>
+                    <button onclick="hide_or_show()">続きを表示</button>
                 </p>
             </div>
             <br>
@@ -84,10 +83,25 @@
         <br>
 
         <script src="./getinfo.js"></script>
+        <script>
+            function hide_or_show() {
+                if ($('.default_none').css('display') == 'none') {
+                    $('.default_none').show();
+                    $('button').text('続きを隠す');
+                } else {
+                    $('.default_none').hide();
+                    $('button').text('続きを表示');
+                }
+            }
+        </script>
         <style>
             #map {
                 width: 93%;
-                height: 300px;
+                height: 400px;
+            }
+
+            .default_none {
+                display: none;
             }
         </style>
     </body>

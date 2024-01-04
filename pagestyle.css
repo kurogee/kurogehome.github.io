@@ -31,11 +31,7 @@ body, html {
     background-attachment: fixed;
 }
 
-small {
-    font-size: 15px;
-}
-
-#user, #area {
+#area {
     appearance: none;
     border-radius: 10px 10px;
     font-size: 25px;
@@ -48,48 +44,9 @@ small {
 #box, .box {
     border: 2px solid rgb(67, 131, 199);
     border-radius: 10px 10px;
-    height: 100%;
+    width: 90%;
     background-color: rgb(251, 253, 255);
     box-shadow: 0px 0.3px 4px 0px rgba(0, 0, 0, 0.35);
-    /*スマホに合わせて調整*/
-    width: 70%;
-    @media screen and (max-width: 768px) {
-        width: 90%;
-        height: 130%;
-    }
-}
-
-.icons {
-    display: flex;  
-    gap: 0px;
-    justify-content: center;
-    align-items: center;
-    max-width: 100%;
-    width: 430px;
-    margin-top: 10px;
-    text-align: center;
-}
-
-.icons_text {
-    margin-top: -20px;
-    display: flex;  
-    width: 440px;
-
-    @media screen and (max-width: 768px) {
-        width: 340px;
-        font-size: 15px;
-    }
-
-    @media screen and (max-width: 350px) {
-        display:none;
-    }
-
-}
-
-.icons_text h3 {
-    display: block;  
-    width: 80px;
-    text-align: center;
 }
 
 #user, .button, .text {
@@ -101,62 +58,9 @@ small {
     outline: none;
 }
 
-.text #user_id{
-    width: 30%;
-}
-
-.text #user_pass{
-    width: 30%;
-}
-
-.text#copy-url{
-    width: 50%;
-    @media screen and (max-width: 768px) {
-        width: 70%;
-    }
-}
-
-.text#copy-url-jp{
-    width: 50%;
-    @media screen and (max-width: 768px) {
-        width: 70%;
-    }
-}
-
-.emoji {
-    width: 30px;
-    height: 30px;
-}
-
-.card {
-    border: 2px solid rgb(67, 131, 199);
-    width: 95%;
-    height: 80vh;
-    border-radius: 10px 10px;
-    background-size: cover;
-    box-shadow: 0px 2.5px 2.5px 0px rgba(0, 0, 0, 0.35);
-}
-
-.title_text {
-    font-family: sans-serif;
-}
-
 #area {
     width: 95%;
     height: 430px;
-    @media screen and (max-width: 768px) {
-        width: 90%;
-    }
-}
-
-#toiawase-area{
-    appearance: none;
-    width: 95%;
-    height: 430px;
-    @media screen and (max-width: 768px) {
-        width: 90%;
-        height: 430px;
-    }
 }
 
 .no_warp {
@@ -197,10 +101,6 @@ textarea {
     outline: none;
 }
 
-.menu {
-    width: 10%;
-}
-
 /* ソースコード関連 */
 
 #code > code > pre {
@@ -233,36 +133,9 @@ a.link_color:hover {
     color: rgb(67, 131, 199);
 }
 
-.icons_image_webp {
-    transition: 0.2s ;
-    @media screen and (max-width: 350px) {
-        width:60px;
-        height:60px;
-    }
-
-}
-
-.icons_image_webp:hover {
-    opacity: 0.5 ;
-}
-
-.catchphrase_color {
-    color:#4383c7;
-
-    @media screen and (max-width: 768px) {
-
-        font-size: 27px;
-    }
-
-    @media screen and (max-width: 350px) {
-
-        font-size: 20px;
-    }
-}
 /* ボタン */
 
-.button, .button-forum, .button-game,
- .button-reply, .button-point, #button {
+.button,  #button {
     appearance: none;
     text-align: center;
     text-decoration: none;
@@ -276,8 +149,7 @@ a.link_color:hover {
     box-shadow: 0px 1.5px 1.5px 0px rgba(0, 0, 0, 0.35);
 }
 
-.button:hover, .button-forum:hover, .button-game:hover,
- .button-reply:hover,  #button:hover, .button-point:hover {
+.button:hover, #button:hover {
     color: #fff;
     background: rgb(67, 131, 199);
 }
@@ -296,38 +168,7 @@ a.link_color:hover {
 	padding: 0.5rem 2rem;
 	border-radius: 10px;
 }
-
-.button-game-image {
-    width: 50px;
-    height: 50px;
-}
-
-.button-forum {
-    padding: 0.6rem 2rem;
-}
-
-.button-point {
-    padding: 0.6rem 2rem;
-    @media screen and (max-width: 768px) {
-        padding: 0.3rem 0.2rem;
-    }
-}
-
-.button-reply{
-    padding: 0.3rem 1.2rem;
-}
 /* ボタンここまで */
-
-.buttons {
-    display: flex;  
-    gap: 0px;
-    justify-content: center;
-    align-items: center;
-    max-width: 100%;
-    width: 550px;
-    margin-top: 10px;
-    text-align: center;
-}
 
 .phone_share{
     @media screen and (max-width: 768px) {
@@ -345,24 +186,6 @@ a.link_color:hover {
 
 .shatai{
     font-style: italic;
-}
-
-.big {
-    font-size: 26px;
-}
-
-.small {
-    font-size: 15px;
-}
-
-.forum_image, .note_image {
-    width: 35%;
-    height: auto;
-}
-
-.tool_icon {
-    width: 30px;
-    height: 30px;
 }
 
 .input{
