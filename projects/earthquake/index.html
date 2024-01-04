@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <title>地震情報取得ツール</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../../pagestyle.css">
+        <link rel="shortcut icon" href="../../icon.webp" type="image/webp">
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    </head>
+    <body>
+        <div id="box"><a href="../../index.html">Index</a> | <a href="../../projects/index.html">Projects</a> |  <a href="../../notification/index.html">Notification</a></div>
+        <p></p>
+
+        <h2>地震情報取得ツール</h2>
+        <div id="box">
+            <br>
+            更新頻度: 5秒 <input type="range" id="reload_time" min="5" max="20" value="7"> 20秒
+            <br>
+            <div id="get_earthquake_info" class="box">
+                <p>時間: <span id="date">不明</span></p>
+                <p>場所: <span id="place">不明</span></p>
+                <iframe id="map"
+                    src=""
+                    frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+                <p>マグニチュード: <span id="mag">不明</span></p>
+                <p>深さ: <span id="depth">不明</span></p>
+                <hr>
+                <p>
+                    ・場所別震度・<br>
+                    <small>赤字は最大震度</small><br>
+                    <span id="each_places_scale">＞ 不明</span>
+                </p>
+            </div>
+            <br>
+        </div>
+        <br>
+
+        <div id="box">
+            <h3>Tips</h3>
+            <table>
+                <tr>
+                    <th style="width: 30%;">震度</th>
+                    <th style="width: 70%;">体感</th>
+                </tr>
+                <tr>
+                    <td>震度1</td>
+                    <td>屋内で静かにしている人の中には、揺れをわずかに感じる人がいる</td>
+                </tr>
+                <tr>
+                    <td>震度2</td>
+                    <td>屋内で静かにしている人の大半が、揺れを感じる。眠っている人の中には、目を覚ます人もいる</td>
+                </tr>
+                <tr>
+                    <td>震度3</td>
+                    <td>屋内にいる人のほとんどが、揺れを感じる。歩いている人の中には、揺れを感じる人もいる。眠っている人の大半が、目を覚ます</td>
+                </tr>
+                <tr>
+                    <td>震度4</td>
+                    <td>ほとんどの人が驚く。歩いている人のほとんどが、揺れを感じる。眠っている人のほとんどが、目を覚ます</td>
+                </tr>
+                <tr>
+                    <td>震度5弱</td>
+                    <td>大半の人が、恐怖を覚え、物につかまりたいと感じる</td>
+                </tr>
+                <tr>
+                    <td>震度5強</td>
+                    <td>大半の人が、物につかまらないと歩くことが難しいなど、行動に支障を感じる</td>
+                </tr>
+                <tr>
+                    <td>震度6弱</td>
+                    <td>立っていることが困難になる</td>
+                </tr>
+                <tr>
+                    <td>震度6強</td>
+                    <td>立っていることができず、はわないと動くことができない。揺れにほんろうされ、動くこともできず、飛ばされることもある。(※1)</td>
+                </tr>
+                <tr>
+                    <td>震度7</td>
+                    <td>立っていることができず、はわないと動くことができない。揺れにほんろうされ、動くこともできず、飛ばされることもある。(※1)</td>
+                </tr>
+            </table>
+            <p>※1「6強」と「7」の差は、固定していない家具の倒れ具合や飛んだりする状態の有無、補強されているブロック塀の破損有無などである。</p>
+        </div>
+        <br>
+
+        <script src="./getinfo.js"></script>
+        <style>
+            #map {
+                width: 93%;
+                height: 300px;
+            }
+        </style>
+    </body>
+</html>
