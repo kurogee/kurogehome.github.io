@@ -47,6 +47,10 @@ body, html {
     width: 90%;
     background-color: rgb(251, 253, 255);
     box-shadow: 0px 0.3px 4px 0px rgba(0, 0, 0, 0.35);
+
+    @media screen and (max-width: 480px) {
+        width: 98%;
+    }
 }
 
 #user, .button, .text {
