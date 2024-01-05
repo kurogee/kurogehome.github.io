@@ -25,7 +25,7 @@
                 <p>深さ: <span id="depth">不明</span></p>
                 <hr>
                 <p>
-                    ・場所別震度（最大震度は赤色）・<br>
+                    ・場所別震度<wbr>（最大震度は赤色）・<br>
                     <span id="each_places_scale">不明</span>
                     <button onclick="hide_or_show();">続きを表示</button>
                 </p>
@@ -79,6 +79,38 @@
                 </tr>
             </table>
             <p>※1「6強」と「7」の差は、固定していない家具の倒れ具合や飛んだりする状態の有無、補強されているブロック塀の破損有無などである。</p>
+            <hr>
+
+            <h3>情報取得用Javascriptのご案内</h3>
+            <p>
+                このサイトでは情報取得用の外部サイト向けJavascriptを用意しています。<br>
+                以下の例のコードをコピーして、適時改変してご利用ください。<br>
+                <br>
+                <div id="code">
+                    <code>
+                        <pre>
+&lt;script src="https://kurogehome.f5.si/projects/earthquake/getearthquake.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+    const response = await get();
+    // 例えば、時間と各地の震度を取得する場合
+    const date = response.date;
+    const places_scale = response.eachplacescale;
+    // で取得できます。
+    /*
+        date: 時間
+        place: 震源地
+        maxscale: 最大震度
+        magnitude: マグニチュード
+        depth: 深さ
+        eachplacescale: 各地の震度 [ { place: 場所, scale: 震度 }, ...]
+        latitude: 緯度
+        longitude: 経度
+    */
+&lt;/script&gt;
+                        </pre>
+                    </code>
+                </div>
+            </p>
         </div>
         <br>
 
@@ -102,6 +134,10 @@
 
             .default_none {
                 display: none;
+            }
+
+            p {
+                line-height: 1.2;
             }
         </style>
     </body>
