@@ -22,6 +22,36 @@ async function get_earthquake_info() {
 }
 
 async function put_display() {
+    function change_scale(text) {
+        let result;
+
+        if (text < 0.5) {
+            result = "0";
+        } else if (text >= 0.5 && text < 1.5) {
+            result = "1";
+        } else if (text >= 1.5 && text < 2.5) {
+            result = "2";
+        } else if (text >= 2.5 && text < 3.5) {
+            result = "3";
+        } else if (text >= 3.5 && text < 4.5) {
+            result = "4";
+        } else if (text >= 4.5 && text < 5.0) {
+            result = "5弱";
+        } else if (text >= 5.0 && text < 5.5) {
+            result = "5強";
+        } else if (text >= 5.5 && text < 6.0) {
+            result = "6弱";
+        } else if (text >= 6.0 && text < 6.5) {
+            result = "6強";
+        } else if (text >= 6.5) {
+            result = "7";
+        } else {
+            result = "不明";
+        }
+
+        return result;
+    }
+
     const info = await get_earthquake_info();
 
     let [date, place, mag, depth, map, each_places_scale] = [$("#date"), $("#place"), $("#mag"), $("#depth"), $("#map"), $("#each_places_scale")];
@@ -41,7 +71,9 @@ async function put_display() {
 
         let count = 1;
         info.eachplacescale.forEach(i => {
-            if (i.scale == parseInt(info.maxscale) / 10) {
+            i.scale = change_scale(i.scale);
+
+            if (i.scale == change_scale(parseInt(info.maxscale) / 10)) {
                 mem = mem + `<tr ${count > 10 ? "class='default_none'" : ""}><td>${i.place}</td><td><span style="color: red;">${i.scale}</span></td></tr>\n`;
             } else {
                 mem = mem + `<tr ${count > 10 ? "class='default_none'" : ""}><td>${i.place}</td><td>${i.scale}</td></tr>\n`;
