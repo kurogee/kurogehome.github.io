@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>色当てクイズ</title>
+        <meta charset="utf-8">
+        <!-- JQuery -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../../pagestyle.css">
+        <link rel="shortcut icon" href="../../icon.webp" type="image/webp">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+    </head>
+    <body>
+        <div id="box"><a href="../../index.html">Index</a> | <a href="../../projects/index.html">Projects</a> |  <a href="../../notification/index.html">Notification</a></div>
+        <p></p>
+
+        <div id="box">
+            <h2>色当てクイズ</h2>
+            <p>
+                このゲームは、ランダムに生成された色とできるだけ同じ色を作るゲームです。<br>
+                同じ色を作ることができるかな？
+            </p>
+        </div>
+        <br>
+        <div class="box">
+            <br>
+            <button onclick="new_game();" class="button">ニューゲーム</button>
+            <br><br>
+            <div id="game" class="box for_color">
+                <div>
+                    <table>
+                        <tr>
+                            <th>見本</th><th>プレビュー</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span id="example" class="color"></span>
+                            </td>
+                            <td>
+                                <span id="preview" class="color"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                色調節<br>
+                                <small>
+                                    R : 赤<br>
+                                    G : 緑<br>
+                                    B : 青
+                                </small>
+                            </td>
+                            <td>
+                                R <input type="range" id="r" min="0" max="255" value="0" oninput="change_color();" style="width: 80%;"><input type="text" id="r_number" readonly size="3"><br>
+                                G <input type="range" id="g" min="0" max="255" value="0" oninput="change_color();" style="width: 80%;"><input type="text" id="g_number" readonly size="3"><br>
+                                B <input type="range" id="b" min="0" max="255" value="0" oninput="change_color();" style="width: 80%;"><input type="text" id="b_number" readonly size="3"><br>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <div>
+                    <button onclick="enter();" class="button">決定！</button><br>
+                    <div id="detail_score"></div>
+                    <br>
+                </div>
+            </div>
+            <br>
+        </div>
+
+        <script>
+            let example_r, example_g, example_b;
+
+            function change_color() {
+                let r = parseInt($("#r").val());
+                let g = parseInt($("#g").val());
+                let b = parseInt($("#b").val());
+
+                $("#r_number").val(r);
+                $("#g_number").val(g);
+                $("#b_number").val(b);
+
+                $("#preview").css("background-color", "rgb(" + r + "," + g + "," + b + ")");
+            }
+
+            function new_game() {
+                example_r = Math.floor(Math.random() * 256);
+                example_g = Math.floor(Math.random() * 256);
+                example_b = Math.floor(Math.random() * 256);
+
+                $("#r").val(0);
+                $("#g").val(0);
+                $("#b").val(0);
+
+                $("#r_number").val(0);
+                $("#g_number").val(0);
+                $("#b_number").val(0);
+
+                $("#example").css("background-color", "rgb(" + example_r + "," + example_g + "," + example_b + ")");
+            }
+
+            function enter() {
+                let r = parseInt($("#r").val());
+                let g = parseInt($("#g").val());
+                let b = parseInt($("#b").val());
+
+                // 色の似ている度合いを百分率で計算
+                let score = 100 - (Math.abs(example_r - r) + Math.abs(example_g - g) + Math.abs(example_b - b)) / 7.65;
+
+                // 似ている度合いでA〜Fでランク分け
+                let rank;
+                if (score >= 100) {
+                    rank = "S";
+                } else if (score >= 90) {
+                    rank = "A";
+                } else if (score >= 80) {
+                    rank = "B";
+                } else if (score >= 70) {
+                    rank = "C";
+                } else if (score >= 60) {
+                    rank = "D";
+                } else if (score >= 50) {
+                    rank = "E";
+                } else {
+                    rank = "F";
+                }
+
+                // 結果を表示
+                $("#detail_score").html(`<h2>〜結果〜</h2>
+                <h3>ランク : ${rank}</h3>
+                <p>似ている度合い : ${score.toFixed(2)}%</p>
+                <p>正解 : R: ${example_r}, G: ${example_g}, B: ${example_b}</p>`);
+            }
+        </script>
+
+        <style>
+            .color {
+                display: inline-block;
+                width: 80px;
+                height: 80px;
+                border: 3px solid black;
+            }
+        </style>
+    </body>
+</html>
