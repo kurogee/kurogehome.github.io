@@ -45,15 +45,14 @@
                             <td>
                                 色調節<br>
                                 <small>
-                                    R : 赤(マゼンタ)<br>
-                                    Y : 黄色<br>
-                                    B : 青(シアン)
+                                    RGB <input type="range" id="game_mode" style="width: 15%;" min="0" max="1" value="0" oninput="change_game_mode();"> CMY<br>
+                                    <span id="color_explain"></span>
                                 </small>
                             </td>
                             <td>
-                                R <input type="range" id="r" min="0" max="255" value="0" oninput="change_color();" style="width: 65%;"><input type="number" id="r_number" min="0" max="255" size="1" oninput="change_color_number('r');"><br>
-                                Y <input type="range" id="y" min="0" max="255" value="0" oninput="change_color();" style="width: 65%;"><input type="number" id="y_number" min="0" max="255" size="1" oninput="change_color_number('y');"><br>
-                                B <input type="range" id="b" min="0" max="255" value="0" oninput="change_color();" style="width: 65%;"><input type="number" id="b_number" min="0" max="255" size="1" oninput="change_color_number('b');"><br>
+                                <span id="cr"></span> <input type="range" id="r" min="0" max="255" value="0" oninput="change_color();" style="width: 65%;"><input type="text" id="r_number" style="width: 20%;" readonly><br>
+                                <span id="mg"></span> <input type="range" id="y" min="0" max="255" value="0" oninput="change_color();" style="width: 65%;"><input type="text" id="y_number" style="width: 20%;" readonly><br>
+                                <span id="yb"></span> <input type="range" id="b" min="0" max="255" value="0" oninput="change_color();" style="width: 65%;"><input type="text" id="b_number" style="width: 20%;" readonly><br>
                             </td>
                         </tr>
                     </table>
@@ -70,58 +69,102 @@
 
         <script>
             let example_r, example_y, example_b;
+            let r, y, b;
+            let game_mode = 0;
 
-            function change_color() {
-                let r = parseInt($("#r").val());
-                let y = parseInt($("#y").val());
-                let b = parseInt($("#b").val());
-            
-                $("#r_number").val(r);
-                $("#y_number").val(y);
-                $("#b_number").val(b);
-            
-                $("#preview").css("background-color", "rgb(" + cmy_to_rgb(b, r, y).join(",") + ")");
+            function change_game_mode() {
+                game_mode = parseInt($("#game_mode").val());
+                $("#preview").css("background-color", "rgb(" + convert_color(r, y, b).join(",") + ")");
+
+                if (game_mode == 0) {
+                    $("#color_explain").html(`R : 赤<br>G : 緑<br>B : 青`);
+                    $("#cr").html("R");
+                    $("#mg").html("G");
+                    $("#yb").html("B");
+                } else {
+                    $("#color_explain").html(`C : 青(シアン)<br>M : 赤(マゼンタ)<br>Y : 黄`);
+                    $("#cr").html("C");
+                    $("#mg").html("M");
+                    $("#yb").html("Y");
+                }
             }
-            
+
+            function reset() {
+                $("#r").val(0);
+                $("#y").val(0);
+                $("#b").val(0);
+
+                $("#r_number").val(0);
+                $("#y_number").val(0);
+                $("#b_number").val(0);
+            }
+
             // 色の三原色を光の三原色に変換
-            function cmy_to_rgb(c, m, y) {
-                let r = 255 * (1 - c / 255);
-                let g = 255 * (1 - m / 255);
-                let b = 255 * (1 - y / 255);
-                return [r, g, b];
+            function convert_color(r, g, b) {
+                if (game_mode == 0) return [r, g, b];
+
+                let m = 255 * (1 - r / 255);
+                let y = 255 * (1 - g / 255);
+                let c = 255 * (1 - b / 255);
+                return [m, y, c];
             }
-            
-            function change_color_number(type) {
-                let color = parseInt($(`#${type}_number`).val() == "" ? 0 : $(`#${type}_number`).val());
-                $(`#${type}`).val(color);
-            
-                change_color();
+
+            function change_color(cr, cy, cb) {
+                if (cr != undefined) {
+                    $("#r").val(cr);
+                    $("#r_number").val(cr);
+                } else {
+                    r = parseInt($("#r").val());
+                    $("#r").val(r);
+                    $("#r_number").val(r);
+                }
+
+                if (cy != undefined) {
+                    $("#y").val(cy);
+                    $("#y_number").val(cy);
+                } else {
+                    y = parseInt($("#y").val());
+                    $("#y").val(y);
+                    $("#y_number").val(y);
+                }
+
+                if (cb != undefined) {
+                    $("#b").val(cb);
+                    $("#b_number").val(cb);
+                } else {
+                    b = parseInt($("#b").val());
+                    $("#b").val(b);
+                    $("#b_number").val(b);
+                }
+
+                $("#preview").css("background-color", "rgb(" + convert_color(r, y, b).join(",") + ")");
             }
-            
+
             function new_game() {
                 example_r = Math.floor(Math.random() * 256);
                 example_y = Math.floor(Math.random() * 256);
                 example_b = Math.floor(Math.random() * 256);
-            
-                $("#r").val(0);
-                $("#y").val(0);
-                $("#b").val(0);
-            
-                $("#r_number").val(0);
-                $("#y_number").val(0);
-                $("#b_number").val(0);
-            
-                $("#example").css("background-color", "rgb(" + cmy_to_rgb(example_b, example_r, example_y).join(",") + ")");
+
+                reset();
+
+                $("#example").css("background-color", "rgb(" + convert_color(example_r, example_y, example_b).join(",") + ")");
             }
-            
+
             function enter() {
                 let r = parseInt($("#r").val());
                 let y = parseInt($("#y").val());
                 let b = parseInt($("#b").val());
-            
+
+                let convert;
+                if (game_mode == 0) {
+                    convert = [r, y, b];
+                } else {
+                    convert = [255 - r, 255 - y, 255 - b];
+                }
+                
                 // 色の似ている度合いを百分率で計算
-                let score = 100 - (Math.abs(example_r - r) + Math.abs(example_y - y) + Math.abs(example_b - b)) / 7.65;
-            
+                let score = 100 - (Math.abs(convert[0] - example_r) + Math.abs(convert[1] - example_y) + Math.abs(convert[2] - example_b)) / 7.65;
+
                 // 似ている度合いでA〜Fでランク分け
                 let rank;
                 if (score >= 97) {
@@ -139,12 +182,25 @@
                 } else {
                     rank = "F";
                 }
-            
-                // 結果を表示
-                $("#detail_score").html(`<h2>〜結果〜</h2>
+
+                let result = `<h2>〜結果〜</h2>
                 <h3>ランク : ${rank}</h3>
                 <p>似ている度合い : ${score.toFixed(2)}%</p>
-                <p>正解 : R: ${example_r}, G: ${example_y}, B: ${example_b}</p>`);
+                <p>正解 : `;
+                
+                if (game_mode == 0) {
+                    result += `R : ${example_r}, G : ${example_y}, B : ${example_b}`;
+                } else {
+                    // CMY用に数値を変換して表示
+                    result += `C : ${255 - example_r}, M : ${255 - example_y}, Y : ${255 - example_b}`;
+                }
+
+                // 結果を表示
+                $("#detail_score").html(result);
+            }
+
+            onload = function() {
+                change_game_mode();
             }
         </script>
 
