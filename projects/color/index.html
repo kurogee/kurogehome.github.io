@@ -157,13 +157,15 @@
 
                 let convert;
                 if (game_mode == 0) {
-                    convert = [r, y, b];
-                } else {
                     convert = [255 - r, 255 - y, 255 - b];
+                } else {
+                    convert = [r, y, b];
                 }
                 
+                let score = 0;
                 // 色の似ている度合いを百分率で計算
-                let score = 100 - (Math.abs(convert[0] - example_r) + Math.abs(convert[1] - example_y) + Math.abs(convert[2] - example_b)) / 7.65;
+                score = 100 - (Math.abs(convert[0] - (255 - example_r)) + Math.abs(convert[1] - (255 - example_y)) + Math.abs(convert[2] - (255 - example_b))) / 7.65;
+                // let score = 100 - (Math.abs(convert[0] - example_r) + Math.abs(convert[1] - example_y) + Math.abs(convert[2] - example_b)) / 7.65;
 
                 // 似ている度合いでA〜Fでランク分け
                 let rank;
