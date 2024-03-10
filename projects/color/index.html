@@ -141,6 +141,9 @@
             }
 
             function new_game() {
+                game_mode = 0;
+                change_game_mode();
+                
                 example_r = Math.floor(Math.random() * 256);
                 example_y = Math.floor(Math.random() * 256);
                 example_b = Math.floor(Math.random() * 256);
