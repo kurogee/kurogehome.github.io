@@ -23,7 +23,7 @@
             </p>
         </div>
         <br>
-        <div class="box">
+        <div class="box" id="game_display">
             <br>
             <button onclick="new_game();" class="button">ニューゲーム</button>
             <br><br>
@@ -33,26 +33,22 @@
                         <tr>
                             <th>見本</th><th>プレビュー</th>
                         </tr>
-                        <tr>
-                            <td>
-                                <span id="example" class="color"></span>
-                            </td>
-                            <td>
-                                <span id="preview" class="color"></span>
-                            </td>
+                        <tr style="height: 100px;">
+                            <td id="example" class="color"></td>
+                            <td id="preview" class="color"></td>
                         </tr>
                         <tr>
                             <td>
                                 色調節<br>
                                 <small>
-                                    RGB <input type="range" id="game_mode" style="width: 15%;" min="0" max="1" value="0" oninput="change_game_mode();"> CMY<br>
+                                    RGB <input type="range" id="game_mode" style="width: 30%;" min="0" max="1" value="0" oninput="change_game_mode();"> CMY<br>
                                     <span id="color_explain"></span>
                                 </small>
                             </td>
-                            <td>
-                                <span id="cr"></span> <input type="range" id="r" min="0" max="255" value="0" oninput="change_color();" style="width: 65%;"><input type="text" id="r_number" style="width: 20%;" readonly><br>
-                                <span id="mg"></span> <input type="range" id="y" min="0" max="255" value="0" oninput="change_color();" style="width: 65%;"><input type="text" id="y_number" style="width: 20%;" readonly><br>
-                                <span id="yb"></span> <input type="range" id="b" min="0" max="255" value="0" oninput="change_color();" style="width: 65%;"><input type="text" id="b_number" style="width: 20%;" readonly><br>
+                            <td id="range_cell">
+                                <span id="cr"></span> <input type="range" id="r" min="0" max="255" value="0" oninput="change_color();" style="width: 60%;"><input type="text" id="r_number" style="width: 20%;" readonly><br>
+                                <span id="mg"></span> <input type="range" id="y" min="0" max="255" value="0" oninput="change_color();" style="width: 60%;"><input type="text" id="y_number" style="width: 20%;" readonly><br>
+                                <span id="yb"></span> <input type="range" id="b" min="0" max="255" value="0" oninput="change_color();" style="width: 60%;"><input type="text" id="b_number" style="width: 20%;" readonly><br>
                             </td>
                         </tr>
                     </table>
@@ -72,41 +68,16 @@
             let r, y, b;
             let game_mode = 0;
 
-            function change_game_mode() {
-                game_mode = parseInt($("#game_mode").val());
-                $("#preview").css("background-color", "rgb(" + convert_color(r, y, b).join(",") + ")");
-
+            function set_css_range_color() {
                 if (game_mode == 0) {
-                    $("#color_explain").html(`R : 赤<br>G : 緑<br>B : 青`);
-                    $("#cr").html("R");
-                    $("#mg").html("G");
-                    $("#yb").html("B");
+                    $("#r").css("background", "linear-gradient(to right, #000, #f00)");
+                    $("#y").css("background", "linear-gradient(to right, #000, #0f0)");
+                    $("#b").css("background", "linear-gradient(to right, #000, #00f)");
                 } else {
-                    $("#color_explain").html(`C : 青(シアン)<br>M : 赤(マゼンタ)<br>Y : 黄`);
-                    $("#cr").html("C");
-                    $("#mg").html("M");
-                    $("#yb").html("Y");
+                    $("#r").css("background", "linear-gradient(to right, #fff, #0ff)");
+                    $("#y").css("background", "linear-gradient(to right, #fff, #f0f)");
+                    $("#b").css("background", "linear-gradient(to right, #fff, #ff0)");
                 }
-            }
-
-            function reset() {
-                $("#r").val(0);
-                $("#y").val(0);
-                $("#b").val(0);
-
-                $("#r_number").val(0);
-                $("#y_number").val(0);
-                $("#b_number").val(0);
-            }
-
-            // 色の三原色を光の三原色に変換
-            function convert_color(r, g, b) {
-                if (game_mode == 0) return [r, g, b];
-
-                let m = 255 * (1 - r / 255);
-                let y = 255 * (1 - g / 255);
-                let c = 255 * (1 - b / 255);
-                return [m, y, c];
             }
 
             function change_color(cr, cy, cb) {
@@ -138,6 +109,44 @@
                 }
 
                 $("#preview").css("background-color", "rgb(" + convert_color(r, y, b).join(",") + ")");
+            }
+
+            function change_game_mode() {
+                game_mode = parseInt($("#game_mode").val());
+                set_css_range_color();
+                $("#preview").css("background-color", "rgb(" + convert_color(r, y, b).join(",") + ")");
+
+                if (game_mode == 0) {
+                    $("#color_explain").html(`R : 赤<br>G : 緑<br>B : 青`);
+                    $("#cr").html("R");
+                    $("#mg").html("G");
+                    $("#yb").html("B");
+                } else {
+                    $("#color_explain").html(`C : 青<br>M : 赤<br>Y : 黄`);
+                    $("#cr").html("C");
+                    $("#mg").html("M");
+                    $("#yb").html("Y");
+                }
+            }
+
+            function reset() {
+                $("#r").val(0);
+                $("#y").val(0);
+                $("#b").val(0);
+
+                $("#r_number").val(0);
+                $("#y_number").val(0);
+                $("#b_number").val(0);
+            }
+
+            // 色の三原色を光の三原色に変換
+            function convert_color(r, g, b) {
+                if (game_mode == 0) return [r, g, b];
+
+                let m = 255 * (1 - r / 255);
+                let y = 255 * (1 - g / 255);
+                let c = 255 * (1 - b / 255);
+                return [m, y, c];
             }
 
             function new_game() {
@@ -211,11 +220,113 @@
         </script>
 
         <style>
-            .color {
-                display: inline-block;
-                width: 80px;
-                height: 80px;
-                border: 3px solid black;
+            :root {
+                --range-height: 45px;
+                --range-thumb-size: 45px;
+            }
+
+            #range_cell {
+                width: 100%;
+            }
+
+            tr > td:nth-child(1) {
+                width: 40%;
+                height: 100%;
+            }
+
+            tr > td:nth-child(2) {
+                width: 60%;
+                height: 100%;
+            }
+
+            /* テキストボックスのスマホ対応な大きさの装飾 */
+            input[type="text"] {
+                height: calc(var(--range-height) / 2);
+                vertical-align: top;
+                border: 2px solid #4CAF50;
+                border-radius: 5px;
+            }
+
+            /* 三原色用 range装飾 */
+
+            input[type="range"]:not(#game_mode) {
+                -webkit-appearance: none;
+                width: 100%;
+                height: var(--range-height);
+                border-radius: 5px;
+                background: #d3d3d3;
+                outline: none;
+                opacity: 0.7;
+                -webkit-transition: .2s;
+                transition: opacity .2s;
+                border: 2px solid black;
+            }
+
+            input[type="range"]:not(#game_mode)::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: var(--range-thumb-size);
+                height: var(--range-thumb-size);
+                border-radius: 50%;
+                background: #4CAF50;
+                cursor: pointer;
+            }
+
+            input[type="range"]:not(#game_mode)::-moz-range-thumb {
+                width: var(--range-thumb-size);
+                height: var(--range-thumb-size);
+                border-radius: 50%;
+                background: #4CAF50;
+                cursor: pointer;
+            }
+
+            input[type="range"]:not(#game_mode)::-webkit-slider-thumb:hover {
+                opacity: 1;
+            }
+
+            input[type="range"]:not(#game_mode)::-moz-range-thumb:hover {
+                opacity: 1;
+            }
+
+            /* game_mode用 range装飾 */
+
+            input[type="range"]:not(#cr, #mg, #yb) {
+                -webkit-appearance: none;
+                width: 100%;
+                height: 20px;
+                border-radius: 5px;
+                background: #d3d3d3;
+                outline: none;
+                opacity: 0.7;
+                -webkit-transition: .2s;
+                transition: opacity .2s;
+                border: 2px solid black;
+            }
+
+            input[type="range"]:not(#cr, #mg, #yb)::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                background: #4CAF50;
+                cursor: pointer;
+            }
+
+            input[type="range"]:not(#cr, #mg, #yb)::-moz-range-thumb {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                background: #4CAF50;
+                cursor: pointer;
+            }
+
+            input[type="range"]:not(#cr, #mg, #yb)::-webkit-slider-thumb:hover {
+                opacity: 1;
+            }
+
+            input[type="range"]:not(#cr, #mg, #yb)::-moz-range-thumb:hover {
+                opacity: 1;
             }
         </style>
     </body>
