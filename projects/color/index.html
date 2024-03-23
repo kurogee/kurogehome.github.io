@@ -250,7 +250,7 @@
             /* 三原色用 range装飾 */
 
             input[type="range"]:not(#game_mode) {
-                -webkit-appearance: none;
+                appearance: none;
                 width: 100%;
                 height: var(--range-height);
                 border-radius: 5px;
@@ -263,7 +263,6 @@
             }
 
             input[type="range"]:not(#game_mode)::-webkit-slider-thumb {
-                -webkit-appearance: none;
                 appearance: none;
                 width: var(--range-thumb-size);
                 height: var(--range-thumb-size);
@@ -291,7 +290,7 @@
             /* game_mode用 range装飾 */
 
             input[type="range"]:not(#cr, #mg, #yb) {
-                -webkit-appearance: none;
+                appearance: none;
                 width: 100%;
                 height: 20px;
                 border-radius: 5px;
