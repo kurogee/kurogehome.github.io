@@ -74,9 +74,9 @@ async function put_display() {
             i.scale = change_scale(i.scale);
 
             if (i.scale == change_scale(parseInt(info.maxscale) / 10)) {
-                mem = mem + `<tr ${count > 10 ? "class='default_none'" : ""}><td>${i.place}</td><td><span style="color: red;">${i.scale}</span></td></tr>\n`;
+                mem = mem + `<tr ${count > 10 ? "class='default_none'" : ""}><td class="place_elem">${i.place}</td><td class="scale_elem"><span style="color: red;">${i.scale}</span></td></tr>\n`;
             } else {
-                mem = mem + `<tr ${count > 10 ? "class='default_none'" : ""}><td>${i.place}</td><td>${i.scale}</td></tr>\n`;
+                mem = mem + `<tr ${count > 10 ? "class='default_none'" : ""}><td class="place_elem">${i.place}</td><td class="scale_elem">${i.scale}</td></tr>\n`;
             }
             count++;
         });
@@ -88,12 +88,44 @@ async function put_display() {
     }
 
     if ($('.default_none').length == 0) {
-        $('button').prop('disabled', true);
+        $("#hide_or_show").prop('disabled', true);
     } else {
-        $('button').prop('disabled', false);
+        $("#hide_or_show").prop('disabled', false);
     }
     
     console.log("updated");
+}
+
+function hide_or_show() {
+    if ($('.default_none').css('display') == 'none') {
+        $('.default_none').show();
+        $('#hide_or_show').text('続きを隠す');
+    } else {
+        $('.default_none').hide();
+        $('#hide_or_show').text('続きを表示');
+    }
+}
+
+function place_search() {
+    let search = $("#place_searcher").val();
+    console.log(search);
+    if (search == "") {
+        put_display();
+    }
+
+    $('.place_elem').each(function() {
+        $(this).parent().show();
+    });
+
+    $('.place_elem').each(function() {
+        if ($(this).text().indexOf(search) == -1) {
+            $(this).parent().hide();
+        }
+
+        if ($(this).parent().find(".scale_elem").text() == search) {
+            $(this).parent().show();
+        }
+    });
 }
 
 let interval;
