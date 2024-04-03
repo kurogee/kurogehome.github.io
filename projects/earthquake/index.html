@@ -9,7 +9,124 @@
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     </head>
     <body>
-        <div id="box"><a href="../../index.html">Index</a> | <a href="../../projects/index.html">Projects</a> |  <a href="../../notification/index.html">Notification</a></div>
+        <!-- メニュー ここから -->
+        <div id="hamburger_menu">
+            <button id="hamburger_menu_button">
+                <div id="line1"></div>
+                <div id="line2"></div>
+                <div id="line3"></div>
+            </button>
+            <div id="hamburger_menu_content">
+                <ul>
+                    <li>
+                        <a href="../../index.html">Home</a>
+                    </li>
+                    <li>
+                        <div id="menu_projects">Projects ▽</div>
+                        <div id="menu_projects_option" class="menu_option">
+                            <ul>
+                                <li>
+                                    <a href="../../projects/index.html">Index</a>
+                                </li>
+                                <li>
+                                    <a href="../../projects/clock/index.html" target="_blank">時計</a>
+                                </li>
+                                <li>
+                                    <a href="../../projects/color/index.html">色当てゲーム</a>
+                                </li>
+                                <li>
+                                    <a href="../../projects/earthquake/index.html">地震情報取得ツール</a>
+                                </li>
+                                <li>
+                                    <a href="../../projects/I_am_not_robot/index.html">私はロボットではありませんゲーム</a>
+                                </li>
+                                <li>
+                                    <a href="../../projects/mine/index.html">マインスイーパ</a>
+                                </li>
+                                <li>
+                                    <a href="../../projects/slider/index.html">スライドパズル</a>
+                                </li>
+                                <li>
+                                    <a href="../../projects/typing/index.html" target="_blank">英語タイピングゲーム</a>
+                                </li>
+                                <li>
+                                    <a href="../../projects/pokemon/index.html">ポケモン体重・サイズ検索</a>
+                                </li>
+                                <li>
+                                    <a href="../../projects/wareki/index.html">和暦西暦変換ツール</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="../../notification/index.html">Notification</a>
+                    </li>
+                    <li>
+                        <div id="menu_other_sites">Other My Wibsites ▽</div>
+                        <div id="menu_other_sites_option" class="menu_option">
+                            <ul>
+                                <li>
+                                    <a href="https://hitokuchi.f5.si" target="_blank">hitokuchi</a>
+                                </li>
+                                <li>
+                                    <a href="https://wl.hitokuchi.f5.si" target="_blank">英単語学習アプリ</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <script>
+            // メニュー用のスクリプト
+            $(function() {
+                $("#hamburger_menu_button").click(function() {
+                    // メニューの表示・非表示を右から左になめらかにする
+                    $("#hamburger_menu_content").animate({
+                        width: "toggle"
+                    }, 200);
+                    if ($("#line1").css("transform") == "none") {
+                        // ハンバーガーメニューのアニメーション
+                        $("#line1").css("transform", "rotate(45deg) translate(9px, 4.5px)");
+                        $("#line2").css("display", "none");
+                        $("#line3").css("transform", "rotate(135deg) translate(-9px, 4.5px)");
+                        $("#line1, #line3").css("right", "14px");
+                    } else {
+                        // ハンバーガーメニューのアニメーション
+                        $("#line1").css("transform", "none");
+                        $("#line2").css("display", "block");
+                        $("#line3").css("transform", "none");
+                        $("#line1, #line3").css("right", "10px");
+                    }
+                });
+
+                $("#menu_projects").click(function() {
+                    if ($("#menu_projects_option").css("display") == "none") {
+                        $("#menu_projects").text("Projects △");
+                    } else {
+                        $("#menu_projects").text("Projects ▽");
+                    }
+                    // サブメニューの表示・非表示を上から下になめらかにする
+                    $("#menu_projects_option").animate({
+                        height: "toggle"
+                    }, 200);
+                });
+
+                $("#menu_other_sites").click(function() {
+                    if ($("#menu_other_sites_option").css("display") == "none") {
+                        $("#menu_other_sites").text("Other My Wibsites △");
+                    } else {
+                        $("#menu_other_sites").text("Other My Wibsites ▽");
+                    }
+                    // サブメニューの表示・非表示を上から下になめらかにする
+                    $("#menu_other_sites_option").animate({
+                        height: "toggle"
+                    }, 200);
+                });
+            });
+        </script>
+        <!-- メニュー ここまで -->
         <p></p>
 
         <h2>地震情報取得ツール</h2>
