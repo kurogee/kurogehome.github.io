@@ -129,15 +129,18 @@
         <!-- メニュー ここまで -->
         <p></p>
 
-        <h2>地震情報取得ツール</h2>
+        <div id="box">
+            <h2>地震情報取得ツール</h2>
+        </div>
+        
         <div id="box">
             <br>
-            更新頻度: <input type="text" id="reload_time" size="20" value="10"> 秒
-            <br><br>
+            更新頻度: <input type="text" id="reload_time" size="20" value="10"> 秒<br>
             <div id="get_earthquake_info" class="box">
                 <p>時間: <span id="date">不明</span></p>
                 <p>場所: <span id="place">不明</span></p>
                 <iframe id="map" src="" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+                
                 <p>マグニチュード: <span id="mag">不明</span></p>
                 <p>深さ: <span id="depth">不明</span></p>
                 <hr>
@@ -150,7 +153,6 @@
             </div>
             <br>
         </div>
-        <br>
 
         <div id="box">
             <h3>Tips</h3>
