@@ -1,10 +1,10 @@
 
-let mass = [];
+let mass;
 let putMass;
 let allow;
 let player;
-let player_cards;
 let playCount;
+let history;
 
 function resetMass() {
     // massを3x3で、全て0埋めする
@@ -13,7 +13,7 @@ function resetMass() {
     playCount = [0, 0];
     allow = [true, true];
     player = 1;
-    player_cards = [[1, 1, 1, 2, 2, 3], [1, 1, 1, 2, 2, 3]];
+    history = [[], []];
 }
 
 function setMass(x, y) {
@@ -26,34 +26,31 @@ function setMass(x, y) {
     mass[y][x] = player;
     playCount[player - 1]++;
 
-    let nowMass = mass.reduce((a, b) => a.concat(b));
-    if (player == 1 && playCount[0] % 2 != 0 && playCount[0] > 1) {
-        // 自分の埋めたマスの中で、ランダムに1つを選ぶ
-        let randomMass = nowMass.map((v, i) => v === 1 ? i : -1).filter((v) => v !== -1);
-        let random = Math.floor(Math.random() * randomMass.length);
-        let randomX = randomMass[random] % 3;
-        let randomY = Math.floor(randomMass[random] / 3);
-        putMass[0] = [randomX, randomY];
+    // historyに記録していく
+    history[player - 1].push([x, y]);
+    console.log(history);
+
+    // 次に消されるところを予告する
+    if (player == 1 && playCount[1] % 2 == 0 && playCount[1] > 1) {
+        putMass[1] = history[1][0];
     }
-    
-    if (player == 2 && playCount[1] % 2 != 0 && playCount[1] > 1) {
-        // 自分の埋めたマスの中で、ランダムに1つを選ぶ
-        let randomMass = nowMass.map((v, i) => v === 2 ? i : -1).filter((v) => v !== -1);
-        let random = Math.floor(Math.random() * randomMass.length);
-        let randomX = randomMass[random] % 3;
-        let randomY = Math.floor(randomMass[random] / 3);
-        putMass[1] = [randomX, randomY];
+
+    if (player == 2 && playCount[0] % 2 == 0 && playCount[0] > 1) {
+        putMass[0] = history[0][0];
     }
 
     if (player == 1 && playCount[0] % 2 == 0 && playCount[0] > 2) {
         mass[putMass[0][1]][putMass[0][0]] = 0;
+        // historyの最初の内容を削除
+        history[0].shift();
     }
     
     if (player == 2 && playCount[1] % 2 == 0 && playCount[1] > 2) {
         mass[putMass[1][1]][putMass[1][0]] = 0;
+        // historyの最初の内容を削除
+        history[1].shift();
     }
 
-    console.log(playCount[0], playCount[1]);
     showMass($("#game"));
 
     let check = checkWin();
