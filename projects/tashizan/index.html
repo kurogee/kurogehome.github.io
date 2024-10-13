@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>シンプルな足し算</title>
+        <meta charset="utf-8">
+        <!-- JQuery -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../../pagestyle.css">
+        <link rel="shortcut icon" href="../../icon.webp" type="image/webp">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+    </head>
+    <body>
+        <!-- メニュー ここから -->
+        <div id="hamburger_menu">
+            <button id="hamburger_menu_button">
+                <div id="line1"></div>
+                <div id="line2"></div>
+                <div id="line3"></div>
+            </button>
+            <div id="hamburger_menu_content">
+                <ul>
+                    <li>
+                        <a href="../../index.html">Home</a>
+                    </li>
+                    <li>
+                        <div id="menu_projects">Projects ▽</div>
+                        <div id="menu_projects_option" class="menu_option">
+                            <ul>
+                                <li>
+                                    <a href="../../projects/index.html">Index</a>
+                                </li>
+                                <li>
+                                    <a href="../../projects/clock/index.html" target="_blank">時計</a>
+                                </li>
+                                <li>
+                                    <a href="../../projects/color/index.html">色当てゲーム</a>
+                                </li>
+                                <li>
+                                    <a href="../../projects/earthquake/index.html">地震情報取得ツール</a>
+                                </li>
+                                <li>
+                                    <a href="../../projects/I_am_not_robot/index.html">私はロボットではありませんゲーム</a>
+                                </li>
+                                <li>
+                                    <a href="../../projects/mine/index.html">マインスイーパ</a>
+                                </li>
+                                <li>
+                                    <a href="../../projects/slider/index.html">スライドパズル</a>
+                                </li>
+                                <li>
+                                    <a href="../../projects/typing/index.html" target="_blank">英語タイピングゲーム</a>
+                                </li>
+                                <li>
+                                    <a href="../../projects/pokemon/index.html">ポケモン体重・サイズ検索</a>
+                                </li>
+                                <li>
+                                    <a href="../../projects/wareki/index.html">和暦西暦変換ツール</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="../../notification/index.html">Notification</a>
+                    </li>
+                    <li>
+                        <div id="menu_other_sites">My Other Websites ▽</div>
+                        <div id="menu_other_sites_option" class="menu_option">
+                            <ul>
+                                <li>
+                                    <a href="https://hitokuchi.f5.si" target="_blank">hitokuchi</a>
+                                </li>
+                                <li>
+                                    <a href="https://wl.hitokuchi.f5.si" target="_blank">英単語学習アプリ</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <script>
+            // メニュー用のスクリプト
+            $(function() {
+                $("#hamburger_menu_button").click(function() {
+                    // メニューの表示・非表示を右から左になめらかにする
+                    $("#hamburger_menu_content").animate({
+                        width: "toggle"
+                    }, 200);
+                    if ($("#line1").css("transform") == "none") {
+                        // ハンバーガーメニューのアニメーション
+                        $("#line1").css("transform", "rotate(45deg) translate(9px, 4.5px)");
+                        $("#line2").css("display", "none");
+                        $("#line3").css("transform", "rotate(135deg) translate(-9px, 4.5px)");
+                        $("#line1, #line3").css("right", "14px");
+                    } else {
+                        // ハンバーガーメニューのアニメーション
+                        $("#line1").css("transform", "none");
+                        $("#line2").css("display", "block");
+                        $("#line3").css("transform", "none");
+                        $("#line1, #line3").css("right", "10px");
+                    }
+                });
+
+                $("#menu_projects").click(function() {
+                    if ($("#menu_projects_option").css("display") == "none") {
+                        $("#menu_projects").text("Projects △");
+                    } else {
+                        $("#menu_projects").text("Projects ▽");
+                    }
+                    // サブメニューの表示・非表示を上から下になめらかにする
+                    $("#menu_projects_option").animate({
+                        height: "toggle"
+                    }, 200);
+                });
+
+                $("#menu_other_sites").click(function() {
+                    if ($("#menu_other_sites_option").css("display") == "none") {
+                        $("#menu_other_sites").text("Other My Wibsites △");
+                    } else {
+                        $("#menu_other_sites").text("Other My Wibsites ▽");
+                    }
+                    // サブメニューの表示・非表示を上から下になめらかにする
+                    $("#menu_other_sites_option").animate({
+                        height: "toggle"
+                    }, 200);
+                });
+            });
+        </script>
+        <!-- メニュー ここまで -->
+        <p></p>
+
+        <div id="box">
+            <h2>シンプルな足し算</h2>
+            <p>
+                シンプルな2桁もしくは3桁の足し算を解くゲームです。
+            </p>
+        </div>
+        
+        <div class="box" id="game_display">
+            <span id="num1" class="number"></span> + <span id="num2" class="number"></span> = <input type="number" id="answer">
+            <p id="judge">Enterキーで答え合わせ</p>
+        </div>
+
+        <script>
+            // 乱数を生成する関数
+            function getRandomInt(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+
+            // 乱数を生成して表示する関数
+            function displayRandomNumbers() {
+                var num1 = getRandomInt(10, 999);
+                var num2 = getRandomInt(10, 999);
+                $("#num1").text(num1);
+                $("#num2").text(num2);
+                // ユーザーが入力するテキストボックスにフォーカスを当てる
+                $("#answer").focus();
+            }
+
+            // ページ読み込み時に実行
+            $(function() {
+                displayRandomNumbers();
+            });
+
+            // ユーザーが#answer上でEnterキーを押したときに実行
+            $("#answer").keypress(function(e) {
+                if (e.which == 13) {
+                    var num1 = parseInt($("#num1").text());
+                    var num2 = parseInt($("#num2").text());
+                    var answer = parseInt($("#answer").val());
+                    if (num1 + num2 == answer) {
+                        $("#judge").text("正解！");
+                    } else {
+                        $("#judge").text("不正解！");
+                    }
+                    displayRandomNumbers();
+                    $("#answer").val("");
+                }
+            });
+        </script>
+
+        <style>
+            /* フォントをローカルから読み込む */
+            @font-face {
+                font-family: "abacus";
+                src: url("ABACUS2.ttf") format("truetype"),
+                        local("ABACUS2");
+            }
+
+            #game_display, .number, #answer {
+                font-family: "abacus";
+            }
+
+            #game_display {
+                text-align: center;
+                margin-right: auto;
+                margin-left: auto;
+                font-size: 5em;
+            }
+
+            .number {
+                color: black;
+                font-size: 1.5em;
+            }
+
+            #answer {
+                font-family: "abacus";
+                font-size: 1.5em;
+                width: 3em;
+                height: 1.5em;
+                text-align: center;
+            }
+        </style>
+    </body>
+</html>
