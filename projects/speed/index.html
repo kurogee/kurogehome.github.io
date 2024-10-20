@@ -185,7 +185,7 @@
                     speeds = [];
                     $("#speed_status").text("測定中です！");
                     $("#speed_button").text("スピード測定を終了");
-                    navigator.geolocation.watchPosition(onKeepSpeed, onError);
+                    navigator.geolocation.watchPosition(onKeepSpeed, onError, { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 });
                 }
             }
         </script>
