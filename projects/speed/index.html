@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <title>位置情報・速度測定機</title>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="../../icon.webp" type="image/webp">
+        <link rel="stylesheet" href="../../pagestyle.css">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    </head>
+    <body>
+        <!-- メニュー ここから -->
+        <div id="hamburger_menu">
+            <button id="hamburger_menu_button">
+                <div id="line1"></div>
+                <div id="line2"></div>
+                <div id="line3"></div>
+            </button>
+            <div id="hamburger_menu_content">
+                <ul>
+                    <li>
+                        <a href="../../index.html">Home</a>
+                    </li>
+                    <li>
+                        <div id="menu_projects">Projects ▽</div>
+                        <div id="menu_projects_option" class="menu_option">
+                            <ul>
+                                <li>
+                                    <a href="../../projects/index.html">Index</a>
+                                </li>
+                                <li>
+                                    <a href="../../projects/clock/index.html" target="_blank">時計</a>
+                                </li>
+                                <li>
+                                    <a href="../../projects/color/index.html">色当てゲーム</a>
+                                </li>
+                                <li>
+                                    <a href="../../projects/earthquake/index.html">地震情報取得ツール</a>
+                                </li>
+                                <li>
+                                    <a href="../../projects/I_am_not_robot/index.html">私はロボットではありませんゲーム</a>
+                                </li>
+                                <li>
+                                    <a href="../../projects/mine/index.html">マインスイーパ</a>
+                                </li>
+                                <li>
+                                    <a href="../../projects/slider/index.html">スライドパズル</a>
+                                </li>
+                                <li>
+                                    <a href="../../projects/typing/index.html" target="_blank">英語タイピングゲーム</a>
+                                </li>
+                                <li>
+                                    <a href="../../projects/pokemon/index.html">ポケモン体重・サイズ検索</a>
+                                </li>
+                                <li>
+                                    <a href="../../projects/wareki/index.html">和暦西暦変換ツール</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="../../notification/index.html">Notification</a>
+                    </li>
+                    <li>
+                        <div id="menu_other_sites">My Other Websites ▽</div>
+                        <div id="menu_other_sites_option" class="menu_option">
+                            <ul>
+                                <li>
+                                    <a href="https://hitokuchi.f5.si" target="_blank">hitokuchi</a>
+                                </li>
+                                <li>
+                                    <a href="https://wl.hitokuchi.f5.si" target="_blank">英単語学習アプリ</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <script>
+            // メニュー用のスクリプト
+            $(function() {
+                $("#hamburger_menu_button").click(function() {
+                    // メニューの表示・非表示を右から左になめらかにする
+                    $("#hamburger_menu_content").animate({
+                        width: "toggle"
+                    }, 200);
+                    if ($("#line1").css("transform") == "none") {
+                        // ハンバーガーメニューのアニメーション
+                        $("#line1").css("transform", "rotate(45deg) translate(9px, 4.5px)");
+                        $("#line2").css("display", "none");
+                        $("#line3").css("transform", "rotate(135deg) translate(-9px, 4.5px)");
+                        $("#line1, #line3").css("right", "14px");
+                    } else {
+                        // ハンバーガーメニューのアニメーション
+                        $("#line1").css("transform", "none");
+                        $("#line2").css("display", "block");
+                        $("#line3").css("transform", "none");
+                        $("#line1, #line3").css("right", "10px");
+                    }
+                });
+            
+                $("#menu_projects").click(function() {
+                    if ($("#menu_projects_option").css("display") == "none") {
+                        $("#menu_projects").text("Projects △");
+                    } else {
+                        $("#menu_projects").text("Projects ▽");
+                    }
+                    // サブメニューの表示・非表示を上から下になめらかにする
+                    $("#menu_projects_option").animate({
+                        height: "toggle"
+                    }, 200);
+                });
+            
+                $("#menu_other_sites").click(function() {
+                    if ($("#menu_other_sites_option").css("display") == "none") {
+                        $("#menu_other_sites").text("Other My Wibsites △");
+                    } else {
+                        $("#menu_other_sites").text("Other My Wibsites ▽");
+                    }
+                    // サブメニューの表示・非表示を上から下になめらかにする
+                    $("#menu_other_sites_option").animate({
+                        height: "toggle"
+                    }, 200);
+                });
+            });
+        </script>
+        <!-- メニュー ここまで -->
+        <br>
+        <div id="box">
+            <h2>位置情報・速度測定機</h2>
+            <p>一定時間ごとに情報が更新されます</p>
+            <p>
+                <div id="latitude"></div>
+                <div id="longitude"></div>
+                <div id="speed"></div>
+            </p>
+            <button class="button" onclick="keep_speed();" id="speed_button">スピード測定を開始</button><br>
+            <p id="speed_result"></p>
+            <small id="speed_status">まだスピード測定はしていません...</small>
+            <br>
+        </div>
+
+        <script>
+            let speeds = [];
+
+            let onSuccess = function(position) {
+                let latitude = position.coords.latitude; // 緯度
+                let longitude = position.coords.longitude; // 経度
+                let speed = position.coords.speed; // スピード
+                $("#latitude").text("緯度: " + latitude);
+                $("#longitude").text("経度: " + longitude);
+                $("#speed").text("スピード: " + String((Math.round(speed * 1000) / 1000) * 3.6) + "km/h");
+            };
+
+            let onKeepSpeed = function(position) {
+                let speed = position.coords.speed; // スピード
+                $("#speed").text("スピード: " + String((Math.round(speed * 1000) / 1000) * 3.6) + "km/h");
+                speeds.push(speed);
+            };
+
+            // onError Callback receives a PositionError object
+            //
+            function onError(error) {}
+
+            // 位置情報提供の準備ができたら、コードを実行する
+            addEventListener("deviceorientation", function(event) {
+                navigator.geolocation.watchPosition(onSuccess, onError);
+            });
+
+            let keeping_speed = false;
+            let interval_speed;
+            function keep_speed() {
+                if (keeping_speed) {
+                    keeping_speed = false;
+                    clearInterval(interval_speed);
+                    let average = 0;
+                    speeds.forEach(i => average += i);
+                    average = average / speeds.length;
+                
+                    $("#speed_result").text("結果: " + String((Math.round(average * 1000) / 1000) * 3.6) + "km/h");
+                    $("#speed_status").text("まだスピード測定はしていません...");
+                    $("#speed_button").text("スピード測定を開始");
+                } else {
+                    keeping_speed = true;
+                    speeds = [];
+                    $("#speed_status").text("測定中です！");
+                    $("#speed_button").text("スピード測定を終了");
+                    interval_speed = setInterval(function() {
+                        navigator.geolocation.watchPosition(onKeepSpeed, onError);
+                    }, 100);
+                }
+            }
+        </script>
+
+        <style>
+        </style>
+    </body>
+</html>
