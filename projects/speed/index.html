@@ -170,11 +170,9 @@
             });
 
             let keeping_speed = false;
-            let interval_speed;
             function keep_speed() {
                 if (keeping_speed) {
                     keeping_speed = false;
-                    clearInterval(interval_speed);
                     let average = 0;
                     speeds.forEach(i => average += i);
                     average = average / speeds.length;
@@ -187,9 +185,7 @@
                     speeds = [];
                     $("#speed_status").text("測定中です！");
                     $("#speed_button").text("スピード測定を終了");
-                    interval_speed = setInterval(function() {
-                        navigator.geolocation.watchPosition(onKeepSpeed, onError);
-                    }, 100);
+                    navigator.geolocation.watchPosition(onKeepSpeed, onError);
                 }
             }
         </script>
