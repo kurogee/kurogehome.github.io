@@ -151,12 +151,12 @@
                 let speed = position.coords.speed; // スピード
                 $("#latitude").text("緯度: " + latitude);
                 $("#longitude").text("経度: " + longitude);
-                $("#speed").text("スピード: " + String((Math.round(speed * 1000) / 1000) * 3.6) + "km/h");
+                $("#speed").text("スピード: " + String((Math.round(speed * 1000) / 1000) * 3.6).substr(0, 7) + "km/h");
             };
 
             let onKeepSpeed = function(position) {
                 let speed = position.coords.speed; // スピード
-                $("#speed").text("スピード: " + String((Math.round(speed * 1000) / 1000) * 3.6) + "km/h");
+                $("#speed").text("スピード: " + String((Math.round(speed * 1000) / 1000) * 3.6).substr(0, 7) + "km/h");
                 speeds.push(speed);
             };
 
@@ -177,7 +177,7 @@
                     speeds.forEach(i => average += i);
                     average = average / speeds.length;
                 
-                    $("#speed_result").text("結果: " + String((Math.round(average * 1000) / 1000) * 3.6) + "km/h");
+                    $("#speed_result").text("結果: " + String((Math.round(average * 1000) / 1000) * 3.6).substr(0, 7) + "km/h");
                     $("#speed_status").text("まだスピード測定はしていません...");
                     $("#speed_button").text("スピード測定を開始");
                 } else {
