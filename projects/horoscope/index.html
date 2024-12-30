@@ -138,7 +138,16 @@
         <p></p>
 
         <div id="box">
-            <h2>星座を選択すると下に結果が出ます</h2>
+            <h2>入力すると下に結果が出ます</h2>
+            誕生年：<input type="number" name="year" id="year" class="input">
+            血液型：
+            <select name="blood" id="blood" class="input">
+                <option value="A">A型</option>
+                <option value="B">B型</option>
+                <option value="O">O型</option>
+                <option value="AB">AB型</option>
+            </select>
+            <hr>
             <table>
                 <tr>
                     <td>
@@ -188,59 +197,6 @@
         </div>
 
         <script>
-            // ベータ版
-            
-            function seededRandom(seed) {
-                // 線形合同法のパラメータ
-                const a = 1664525;
-                const c = 1013904223;
-                const m = Math.pow(2, 32);
-                seed = (a * seed + c) % m;
-                return seed / m; // [0, 1) の乱数を生成
-            }
-
-            function getDailyRandomNumber(other_seed_value) {
-                // 現在の日付を基にシード値を生成
-                const today = new Date();
-                const year = today.getUTCFullYear();
-                const month = today.getUTCMonth(); // 0から始まる
-                const date = today.getUTCDate();
-            
-                // シード値を一意に生成（例: 年・月・日を組み合わせる）
-                const seed = year * 10000 + (month + 1) * 100 + date + other_seed_value;
-            
-                // シード値で乱数を生成
-                return seededRandom(seed);
-            }
-
-            function create_random_by_seed(seed, min, max) {
-                return Math.floor(seededRandom(seed) * (max - min + 1) + min);
-            }
-
-            // 占い用CSVファイルの読み込み
-            const csv_file_path = "./horoscope.csv";
-            let csv_data = [];
-            $.get(csv_file_path, function(data) {
-                const rows = data.split("\n");
-                for (let i = 0; i < rows.length; i++) {
-                    if (i == 0) {
-                        continue;
-                    }
-                    const cols = rows[i].split(", ");
-                    csv_data.push({
-                        part: cols[0],
-                        word: cols[1],
-                        group: cols[2]
-                    });
-                }
-            });
-            /*
-                CSVデータの形式
-                part, word, group
-                意味：5W1Hのどこの属するか, 言葉, 運勢のどこに表示させるか（金運、仕事運、健康運、総合運、「all」は全てに表示）
-            */
-
-            console.log(csv_data);
 
             $(function() {
                 $(".button").click(function() {
@@ -251,94 +207,81 @@
                     let num = 0;
                     switch (id) {
                         case "aries":
-                            num = 0;
-                            break;
-                        case "taurus":
                             num = 1;
                             break;
-                        case "gemini":
+                        case "taurus":
                             num = 2;
                             break;
-                        case "cancer":
+                        case "gemini":
                             num = 3;
                             break;
-                        case "leo":
+                        case "cancer":
                             num = 4;
                             break;
-                        case "virgo":
+                        case "leo":
                             num = 5;
                             break;
-                        case "libra":
+                        case "virgo":
                             num = 6;
                             break;
-                        case "scorpio":
+                        case "libra":
                             num = 7;
                             break;
-                        case "sagittarius":
+                        case "scorpio":
                             num = 8;
                             break;
-                        case "capricorn":
+                        case "sagittarius":
                             num = 9;
                             break;
-                        case "aquarius":
+                        case "capricorn":
                             num = 10;
                             break;
-                        case "pisces":
+                        case "aquarius":
                             num = 11;
+                            break;
+                        case "pisces":
+                            num = 12;
                             break;
                     }
 
-                    // CSVデータから占いの文章を作成
-                    // WhenときWhereでWhatをHowかもしれません といったふうに5W1Hで抽出して表示
-                    // データを抽出
-                    let when, where, what, how;
-                    // データを5w1hそれぞれからランダムに取得
-                    when = csv_data.filter(
-                        row => {
-                            return row.part == "when";
-                        }
-                    );
-                    where = csv_data.filter(
-                        row => {
-                            return row.part == "where";
-                        }
-                    );
-                    what = csv_data.filter(
-                        row => {
-                            return row.part == "what";
-                        }
-                    );
-                    how = csv_data.filter(
-                        row => {
-                            return row.part == "how";
-                        }
-                    );
+                    let year = $("#year").val();
 
-                    let overall_fortune = "";
-                    let overall_fortune_data = {
-                        when: when.filter(row => row.group == "all" || row.group == "overall"),
-                        where: where.filter(row => row.group == "all" || row.group == "overall"),
-                        what: what.filter(row => row.group == "all" || row.group == "overall"),
-                        how: how.filter(row => row.group == "all" || row.group == "overall")
+                    let blood = $("#blood").val();
+                    const blood_type = {
+                        "A": 1,
+                        "B": 2,
+                        "O": 3,
+                        "AB": 4
                     };
+                    let blood_num = blood_type[blood];
 
-                    // 今日の日付 + 星座となる乱数用のシード値を作成
-                    const today = new Date();
-                    const seed = today.getFullYear() + today.getMonth() + today.getDate() + num;
+                    let today = new Date();
+                    let today_num = today.getFullYear() * (today.getMonth() + 1) * today.getDate();
 
-                    let overall_random = {
-                        when: overall_fortune_data.when[create_random_by_seed(seed, 0, overall_fortune_data.when.length - 1)],
-                        where: overall_fortune_data.where[create_random_by_seed(seed, 0, overall_fortune_data.where.length - 1)],
-                        what: overall_fortune_data.what[create_random_by_seed(seed, 0, overall_fortune_data.what.length - 1)],
-                        how: overall_fortune_data.how[create_random_by_seed(seed, 0, overall_fortune_data.how.length - 1)]
-                    };
+                    // この日のラッキーナンバーを取得
+                    result = (Math.sqrt(parseInt(year) * today_num * blood_num) / num) % 15;
 
-                    console.log(overall_random);
+                    // 15のタイプを用意する
+                    const result_text = [
+                        "今日は何かしらで上位の成績を取れるかも。", // 1
+                        "今日は何事も裏方に徹する方が良いかも。", // 2
+                        "今日は何かしら厄介なことに巻き込まれるかも。", // 3
+                        "今日はなにか新しいことに挑戦すると良いかも。", // 4
+                        "今日は目立たずに過ごすと良いかも。", // 5
+                        "今日はちょっと気取ってみても良いかも。", // 6
+                        "今日は「ラッキー」と思うことがあるかも。", // 7
+                        "今日は何かしらの悩みを抱えるかも。", // 8
+                        "今日は何かしらの問題を解決できるかも。", // 9
+                        "今日は何か新しい出会いがあるかも。", // 10
+                        "今日は平穏に過ごせるかも。", // 11
+                        "今日は身の回りがちょっと忙しくなるかも。", // 12
+                        "今日は何かしらの不安を感じるかも。", // 13
+                        "今日は相手の言動を待つと良いかも。", // 14
+                        "今日は自分から行動すると良いかも。" // 15
+                    ];
 
-                    overall_fortune = overall_random.when.word + "とき" + overall_random.where.word + "で" + overall_random.what.word + "を" + overall_random.how.word + "かもしれません。";
-
-                    result += overall_fortune;
-                    
+                    result = result_text[Math.floor(result)];
+                
                     $("#result").text(result);
                 });
             });
