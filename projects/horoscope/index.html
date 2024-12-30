@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>適当・十二星座占い</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../../pagestyle.css">
+        <link rel="shortcut icon" href="../../icon.webp" type="image/webp">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    </head>
+    <body>
+        <!-- メニュー ここから -->
+        <div id="hamburger_menu">
+            <button id="hamburger_menu_button">
+                <div id="line1"></div>
+                <div id="line2"></div>
+                <div id="line3"></div>
+            </button>
+            <div id="hamburger_menu_content">
+                <ul>
+                    <li>
+                        <a href="../index.html">Home</a>
+                    </li>
+                    <li>
+                        <div id="menu_projects">Projects ▽</div>
+                        <div id="menu_projects_option" class="menu_option">
+                            <ul>
+                                <li>
+                                    <a href="./index.html">Index</a>
+                                </li>
+                                <li>
+                                    <a href="./clock/index.html" target="_blank">時計</a>
+                                </li>
+                                <li>
+                                    <a href="./color/index.html">色当てゲーム</a>
+                                </li>
+                                <li>
+                                    <a href="./earthquake/index.html">地震情報取得ツール</a>
+                                </li>
+                                <li>
+                                    <a href="./I_am_not_robot/index.html">私はロボットではありませんゲーム</a>
+                                </li>
+                                <li>
+                                    <a href="./mine/index.html">マインスイーパ</a>
+                                </li>
+                                <li>
+                                    <a href="./slider/index.html">スライドパズル</a>
+                                </li>
+                                <li>
+                                    <a href="./typing/index.html" target="_blank">英語タイピングゲーム</a>
+                                </li>
+                                <li>
+                                    <a href="./pokemon/index.html">ポケモン体重・サイズ検索</a>
+                                </li>
+                                <li>
+                                    <a href="./wareki/index.html">和暦西暦変換ツール</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="../notification/index.html">Notification</a>
+                    </li>
+                    <li>
+                        <div id="menu_other_sites">My Other Websites ▽</div>
+                        <div id="menu_other_sites_option" class="menu_option">
+                            <ul>
+                                <li>
+                                    <a href="https://hitokuchi.f5.si" target="_blank">hitokuchi</a>
+                                </li>
+                                <li>
+                                    <a href="https://wl.hitokuchi.f5.si" target="_blank">英単語学習アプリ</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <script>
+            // メニュー用のスクリプト
+            $(function() {
+                $("#hamburger_menu_button").click(function() {
+                    // メニューの表示・非表示を右から左になめらかにする
+                    $("#hamburger_menu_content").animate({
+                        width: "toggle"
+                    }, 200);
+                    if ($("#line1").css("transform") == "none") {
+                        // ハンバーガーメニューのアニメーション
+                        $("#line1").css("transform", "rotate(45deg) translate(9px, 4.5px)");
+                        $("#line2").css("display", "none");
+                        $("#line3").css("transform", "rotate(135deg) translate(-9px, 4.5px)");
+                        $("#line1, #line3").css("right", "14px");
+                    } else {
+                        // ハンバーガーメニューのアニメーション
+                        $("#line1").css("transform", "none");
+                        $("#line2").css("display", "block");
+                        $("#line3").css("transform", "none");
+                        $("#line1, #line3").css("right", "10px");
+                    }
+                });
+
+                $("#menu_projects").click(function() {
+                    if ($("#menu_projects_option").css("display") == "none") {
+                        $("#menu_projects").text("Projects △");
+                    } else {
+                        $("#menu_projects").text("Projects ▽");
+                    }
+                    // サブメニューの表示・非表示を上から下になめらかにする
+                    $("#menu_projects_option").animate({
+                        height: "toggle"
+                    }, 200);
+                });
+
+                $("#menu_other_sites").click(function() {
+                    if ($("#menu_other_sites_option").css("display") == "none") {
+                        $("#menu_other_sites").text("Other My Wibsites △");
+                    } else {
+                        $("#menu_other_sites").text("Other My Wibsites ▽");
+                    }
+                    // サブメニューの表示・非表示を上から下になめらかにする
+                    $("#menu_other_sites_option").animate({
+                        height: "toggle"
+                    }, 200);
+                });
+            });
+        </script>
+        <!-- メニュー ここまで -->
+        <p></p>
+
+        <div id="box">
+            <h2>適当・十二星座占い</h2>
+            <p>
+                この占いは、あなたの星座を入力すると、適当な占いを表示します。
+            </p>
+        </div>
+        <p></p>
+
+        <div id="box">
+            <h2>星座を選択すると下に結果が出ます</h2>
+            <table>
+                <tr>
+                    <td>
+                        <button id="aries" class="button">牡羊座</button>
+                    </td>
+                    <td>
+                        <button id="taurus" class="button">牡牛座</button>
+                    </td>
+                    <td>
+                        <button id="gemini" class="button">双子座</button>
+                    </td>
+                    <td>
+                        <button id="cancer" class="button">蟹座</button>
+                    </td>
+                    <td>
+                        <button id="leo" class="button">獅子座</button>
+                    </td>
+                    <td>
+                        <button id="virgo" class="button">乙女座</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button id="libra" class="button">天秤座</button>
+                    </td>
+                    <td>
+                        <button id="scorpio" class="button">さそり座</button>
+                    </td>
+                    <td>
+                        <button id="sagittarius" class="button">射手座</button>
+                    </td>
+                    <td>
+                        <button id="capricorn" class="button">山羊座</button>
+                    </td>
+                    <td>
+                        <button id="aquarius" class="button">水瓶座</button>
+                    </td>
+                    <td>
+                        <button id="pisces" class="button">魚座</button>
+                    </td>
+                </tr>
+            </table>
+            <hr>
+            <p>
+                <span id="result"></span>
+            </p>
+        </div>
+
+        <script>
+            // ベータ版
+            
+            function seededRandom(seed) {
+                // 線形合同法のパラメータ
+                const a = 1664525;
+                const c = 1013904223;
+                const m = Math.pow(2, 32);
+                seed = (a * seed + c) % m;
+                return seed / m; // [0, 1) の乱数を生成
+            }
+
+            function getDailyRandomNumber(other_seed_value) {
+                // 現在の日付を基にシード値を生成
+                const today = new Date();
+                const year = today.getUTCFullYear();
+                const month = today.getUTCMonth(); // 0から始まる
+                const date = today.getUTCDate();
+            
+                // シード値を一意に生成（例: 年・月・日を組み合わせる）
+                const seed = year * 10000 + (month + 1) * 100 + date + other_seed_value;
+            
+                // シード値で乱数を生成
+                return seededRandom(seed);
+            }
+
+            function create_random_by_seed(seed, min, max) {
+                return Math.floor(seededRandom(seed) * (max - min + 1) + min);
+            }
+
+            // 占い用CSVファイルの読み込み
+            const csv_file_path = "./horoscope.csv";
+            let csv_data = [];
+            $.get(csv_file_path, function(data) {
+                const rows = data.split("\n");
+                for (let i = 0; i < rows.length; i++) {
+                    if (i == 0) {
+                        continue;
+                    }
+                    const cols = rows[i].split(", ");
+                    csv_data.push({
+                        part: cols[0],
+                        word: cols[1],
+                        group: cols[2]
+                    });
+                }
+            });
+            /*
+                CSVデータの形式
+                part, word, group
+                意味：5W1Hのどこの属するか, 言葉, 運勢のどこに表示させるか（金運、仕事運、健康運、総合運、「all」は全てに表示）
+            */
+
+            console.log(csv_data);
+
+            $(function() {
+                $(".button").click(function() {
+                    const id = $(this).attr("id");
+                    let result = "";
+
+                    // 星座を数字に変換
+                    let num = 0;
+                    switch (id) {
+                        case "aries":
+                            num = 0;
+                            break;
+                        case "taurus":
+                            num = 1;
+                            break;
+                        case "gemini":
+                            num = 2;
+                            break;
+                        case "cancer":
+                            num = 3;
+                            break;
+                        case "leo":
+                            num = 4;
+                            break;
+                        case "virgo":
+                            num = 5;
+                            break;
+                        case "libra":
+                            num = 6;
+                            break;
+                        case "scorpio":
+                            num = 7;
+                            break;
+                        case "sagittarius":
+                            num = 8;
+                            break;
+                        case "capricorn":
+                            num = 9;
+                            break;
+                        case "aquarius":
+                            num = 10;
+                            break;
+                        case "pisces":
+                            num = 11;
+                            break;
+                    }
+
+                    // CSVデータから占いの文章を作成
+                    // WhenときWhereでWhatをHowかもしれません といったふうに5W1Hで抽出して表示
+                    // データを抽出
+                    let when, where, what, how;
+                    // データを5w1hそれぞれからランダムに取得
+                    when = csv_data.filter(
+                        row => {
+                            return row.part == "when";
+                        }
+                    );
+                    where = csv_data.filter(
+                        row => {
+                            return row.part == "where";
+                        }
+                    );
+                    what = csv_data.filter(
+                        row => {
+                            return row.part == "what";
+                        }
+                    );
+                    how = csv_data.filter(
+                        row => {
+                            return row.part == "how";
+                        }
+                    );
+
+                    let overall_fortune = "";
+                    let overall_fortune_data = {
+                        when: when.filter(row => row.group == "all" || row.group == "overall"),
+                        where: where.filter(row => row.group == "all" || row.group == "overall"),
+                        what: what.filter(row => row.group == "all" || row.group == "overall"),
+                        how: how.filter(row => row.group == "all" || row.group == "overall")
+                    };
+
+                    // 今日の日付 + 星座となる乱数用のシード値を作成
+                    const today = new Date();
+                    const seed = today.getFullYear() + today.getMonth() + today.getDate() + num;
+
+                    let overall_random = {
+                        when: overall_fortune_data.when[create_random_by_seed(seed, 0, overall_fortune_data.when.length - 1)],
+                        where: overall_fortune_data.where[create_random_by_seed(seed, 0, overall_fortune_data.where.length - 1)],
+                        what: overall_fortune_data.what[create_random_by_seed(seed, 0, overall_fortune_data.what.length - 1)],
+                        how: overall_fortune_data.how[create_random_by_seed(seed, 0, overall_fortune_data.how.length - 1)]
+                    };
+
+                    console.log(overall_random);
+
+                    overall_fortune = overall_random.when.word + "とき" + overall_random.where.word + "で" + overall_random.what.word + "を" + overall_random.how.word + "かもしれません。";
+
+                    result += overall_fortune;
+                    
+                    $("#result").text(result);
+                });
+            });
+        </script>
+    </body>
+</html>
