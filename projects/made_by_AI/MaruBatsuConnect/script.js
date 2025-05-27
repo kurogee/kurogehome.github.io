@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const p2TurnIndicator = document.querySelector('.p2-turn');
 
     const currentNextPieceContainer = document.getElementById('current-next-piece-container');
-    const upcomingPiece2Container = document.getElementById('upcoming-piece-2-container'); // This is the piece-stack div
-    const upcomingPiece3Container = document.getElementById('upcoming-piece-3-container'); // This is the piece-stack div
+    const upcomingPiece2Container = document.getElementById('upcoming-piece-2-container'); 
+    const upcomingPiece3Container = document.getElementById('upcoming-piece-3-container'); 
 
 
     const gameOverMessageElement = document.getElementById('game-over-message');
@@ -70,11 +70,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateNextPiecesDisplay() {
-        // Current piece display
         if (nextPiecesQueue.length > 0) {
             const currentPair = nextPiecesQueue[0];
             currentNextPieceContainer.innerHTML = ''; 
-            currentNextPieceContainer.classList.remove('horizontal', 'vertical'); // Remove both for clean slate
+            currentNextPieceContainer.classList.remove('horizontal', 'vertical'); 
 
             const piece1El = document.createElement('div');
             piece1El.classList.add('piece');
@@ -82,12 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
             piece2El.classList.add('piece');
 
             if (currentPair.type === 'vertical') {
-                currentNextPieceContainer.classList.add('vertical'); // Could be default, but explicit
+                currentNextPieceContainer.classList.add('vertical'); 
                 piece1El.textContent = currentPair.top;
                 piece1El.style.color = currentPair.top === PLAYER1_SYMBOL ? PLAYER1_COLOR : PLAYER2_COLOR;
                 piece2El.textContent = currentPair.bottom;
                 piece2El.style.color = currentPair.bottom === PLAYER1_SYMBOL ? PLAYER1_COLOR : PLAYER2_COLOR;
-            } else { // Horizontal
+            } else { 
                 currentNextPieceContainer.classList.add('horizontal'); 
                 piece1El.textContent = currentPair.left;
                 piece1El.style.color = currentPair.left === PLAYER1_SYMBOL ? PLAYER1_COLOR : PLAYER2_COLOR;
@@ -97,13 +96,12 @@ document.addEventListener('DOMContentLoaded', () => {
             currentNextPieceContainer.appendChild(piece1El);
             currentNextPieceContainer.appendChild(piece2El);
         } else {
-            currentNextPieceContainer.innerHTML = ''; // Clear if no pieces
+            currentNextPieceContainer.innerHTML = ''; 
         }
 
-        // Update upcoming pieces
         [upcomingPiece2Container, upcomingPiece3Container].forEach((container, index) => {
-            container.innerHTML = ''; // Clear previous content of the piece-stack
-            container.classList.remove('horizontal', 'vertical'); // Clean slate for orientation class
+            container.innerHTML = ''; 
+            container.classList.remove('horizontal', 'vertical'); 
             const pieceData = nextPiecesQueue[index + 1];
 
             if (pieceData) {
@@ -113,12 +111,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 p2.classList.add('small-piece');
 
                 if (pieceData.type === 'vertical') {
-                    container.classList.add('vertical'); // Could be default for piece-stack
+                    container.classList.add('vertical'); 
                     p1.textContent = pieceData.top;
                     p1.style.color = pieceData.top === PLAYER1_SYMBOL ? PLAYER1_COLOR : PLAYER2_COLOR;
                     p2.textContent = pieceData.bottom;
                     p2.style.color = pieceData.bottom === PLAYER1_SYMBOL ? PLAYER1_COLOR : PLAYER2_COLOR;
-                } else { // Horizontal
+                } else { 
                     container.classList.add('horizontal');
                     p1.textContent = pieceData.left;
                     p1.style.color = pieceData.left === PLAYER1_SYMBOL ? PLAYER1_COLOR : PLAYER2_COLOR;
@@ -139,60 +137,68 @@ document.addEventListener('DOMContentLoaded', () => {
         let piecePlacedThisTurn = false;
 
         if (pieceToDrop.type === 'vertical') {
-            let rowToPlaceBottom = -1;
-            for (let r = ROWS - 1; r >= 0; r--) { // Find lowest empty cell for bottom piece
-                if (!board[r][col]) {
-                    rowToPlaceBottom = r;
-                    break;
+            let landingRowForBottom = -1; // The row where the bottom piece will actually land.
+
+            // Find the highest occupied cell in the column, or the bottom of the board.
+            for (let r = ROWS - 1; r >= 0; r--) {
+                if (!board[r][col]) { // If this cell is empty
+                    landingRowForBottom = r; // Tentatively, this is where the bottom piece could go
+                } else {
+                    // This cell (r, col) is occupied. So, pieces must go above it.
+                    // The bottom piece of the new pair would land at r-1.
+                    landingRowForBottom = r - 1;
+                    break; 
                 }
             }
-            if (rowToPlaceBottom === -1) return; // Column is full to the brim
+            
+            // After the loop, if landingRowForBottom is still -1 (e.g. r=0 was occupied, so r-1 is -1)
+            // or if it's determined by an occupied cell, it's the row for the *bottom* piece.
 
-            if (rowToPlaceBottom === 0) { // Trying to place bottom at row 0
-                // This means top piece would be at -1, which is only allowed if board[ -1 ] is conceptually fine
-                // For a 2-piece vertical, this means the top piece is off-board, which is game over.
-                // However, the canPlayerMakeMove should catch this.
-                // If we reach here, it means a single column is full at the top.
-                return; // Cannot place here if it means top piece is off.
+            // Check if there's space for two pieces (bottom and top)
+            // landingRowForBottom is where the bottom piece wants to go.
+            // landingRowForBottom - 1 is where the top piece wants to go.
+            if (landingRowForBottom < 0 || // Bottom piece would be off-board (column completely full at the top)
+                landingRowForBottom - 1 < 0 || // Top piece would be off-board
+                board[landingRowForBottom][col] || // Target for bottom piece is somehow already full (shouldn't happen with above logic)
+                board[landingRowForBottom - 1]?.[col] // Target for top piece is full or top piece is off board
+               ) {
+                return; // Cannot place this vertical piece in this column.
             }
-             // Ensure there's space for the top piece as well
-            if (rowToPlaceBottom < 1 || board[rowToPlaceBottom-1]?.[col]) { // Check if cell above is occupied or out of bounds for top
-                 // This column cannot take this vertical piece.
-                 // Player might be able to place it in another column.
-                 return;
-            }
 
-
-            board[rowToPlaceBottom][col] = pieceToDrop.bottom;
-            updateCellDisplay(rowToPlaceBottom, col, pieceToDrop.bottom, true);
-            checkAndScoreConnection(rowToPlaceBottom, col, pieceToDrop.bottom);
+            // Place bottom piece
+            board[landingRowForBottom][col] = pieceToDrop.bottom;
+            updateCellDisplay(landingRowForBottom, col, pieceToDrop.bottom, true);
+            checkAndScoreConnection(landingRowForBottom, col, pieceToDrop.bottom);
             piecePlacedThisTurn = true;
 
-            const rowToPlaceTop = rowToPlaceBottom - 1;
-            board[rowToPlaceTop][col] = pieceToDrop.top;
-            updateCellDisplay(rowToPlaceTop, col, pieceToDrop.top, true);
-            checkAndScoreConnection(rowToPlaceTop, col, pieceToDrop.top);
+            // Place top piece
+            const landingRowForTop = landingRowForBottom - 1;
+            board[landingRowForTop][col] = pieceToDrop.top;
+            updateCellDisplay(landingRowForTop, col, pieceToDrop.top, true);
+            checkAndScoreConnection(landingRowForTop, col, pieceToDrop.top);
 
         } else { // Horizontal piece
             if (col >= COLS - 1) return; 
 
-            let rowToPlace = -1;
+            let landingRow = -1;
+             // For horizontal, find the lowest row where both (r, col) and (r, col+1) are empty.
             for (let r = ROWS - 1; r >= 0; r--) {
                 if (!board[r][col] && !board[r][col + 1]) {
-                    rowToPlace = r;
+                    landingRow = r;
                     break;
                 }
             }
-            if (rowToPlace === -1) return; 
 
-            board[rowToPlace][col] = pieceToDrop.left;
-            updateCellDisplay(rowToPlace, col, pieceToDrop.left, true);
-            checkAndScoreConnection(rowToPlace, col, pieceToDrop.left);
+            if (landingRow === -1) return; // No space for horizontal piece in this column pair.
+
+            board[landingRow][col] = pieceToDrop.left;
+            updateCellDisplay(landingRow, col, pieceToDrop.left, true);
+            checkAndScoreConnection(landingRow, col, pieceToDrop.left);
             piecePlacedThisTurn = true;
 
-            board[rowToPlace][col + 1] = pieceToDrop.right;
-            updateCellDisplay(rowToPlace, col + 1, pieceToDrop.right, true);
-            checkAndScoreConnection(rowToPlace, col + 1, pieceToDrop.right);
+            board[landingRow][col + 1] = pieceToDrop.right;
+            updateCellDisplay(landingRow, col + 1, pieceToDrop.right, true);
+            checkAndScoreConnection(landingRow, col + 1, pieceToDrop.right);
         }
         
         if (!piecePlacedThisTurn) return;
@@ -316,18 +322,26 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!piece) return false; 
         for (let c = 0; c < COLS; c++) {
             if (piece.type === 'vertical') {
-                // Check if there's space for two pieces: board[r][c] and board[r-1][c] must be empty
-                // Lowest possible r for bottom piece is 1 (so top piece is at 0)
-                for (let r = ROWS - 1; r >= 1; r--) { 
-                    if (!board[r][c] && !board[r-1][c]) {
-                         return true; // Found a valid spot for vertical
+                let landingRowForBottom = -1;
+                for (let r = ROWS - 1; r >= 0; r--) {
+                    if (!board[r][c]) {
+                        landingRowForBottom = r;
+                    } else {
+                        landingRowForBottom = r - 1;
+                        break;
                     }
+                }
+                if (landingRowForBottom >= 1 && // Bottom piece lands on or above row 1 (so top is on or above row 0)
+                    !board[landingRowForBottom][c] && // Target for bottom is empty
+                    !board[landingRowForBottom - 1]?.[c] // Target for top is empty (or top is off board if landingRowForBottom is 0, but we check >=1)
+                   ) {
+                    return true;
                 }
             } else { // Horizontal
                 if (c < COLS - 1) { 
                     for (let r = ROWS - 1; r >= 0; r--) {
                         if (!board[r][c] && !board[r][c + 1]) {
-                            return true; // Found a valid spot for horizontal
+                            return true; 
                         }
                     }
                 }
@@ -348,11 +362,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (nextPiecesQueue.length > 0 && !canPlayerMakeMove(currentPlayer, nextPiecesQueue[0])) {
             isGameOver = true;
-            let winner;
-            if (scores[1] > scores[2]) winner = "Player 1 Wins!";
-            else if (scores[2] > scores[1]) winner = "Player 2 Wins!";
-            else winner = "It's a Tie!";
-            endGame(winner + " (No more moves for Player " + currentPlayer + ")");
+            let winnerText;
+            if (scores[1] > scores[2]) winnerText = "Player 1 Wins!";
+            else if (scores[2] > scores[1]) winnerText = "Player 2 Wins!";
+            else winnerText = "It's a Tie!";
+            endGame(winnerText + " (No valid moves for Player " + currentPlayer + ")");
         }
     }
 
@@ -439,24 +453,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function initGame() {
         isGameOver = false;
-        scores = { 1: 0, 2: 0 }; 
-        round = 1; 
-        currentPlayer = 1; 
-        gameOverMessageElement.style.display = 'none';
-
-        createBoard(); 
-        initializeNextPieces();
-        updateScores();
-        updateRoundDisplay();
-
-        p1TurnIndicator.style.visibility = 'visible';
-        p2TurnIndicator.style.visibility = 'hidden';
-        connectionInfoElement.style.visibility = 'hidden'; 
-        currentlyHighlightedCells.forEach(cellEl => cellEl.classList.remove('highlighted')); 
-        currentlyHighlightedCells = [];
-    }
-    
-    restartButton.addEventListener('click', initGame);
-
-    initGame();
-});
+        sco
