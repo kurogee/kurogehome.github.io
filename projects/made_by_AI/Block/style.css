@@ -1,0 +1,89 @@
+body {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+header {
+    margin-bottom: 20px;
+}
+
+.score-container {
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+main {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start; /* 上揃え */
+}
+
+.game-board-container {
+    border: 1px solid #ccc;
+}
+
+#gameBoard {
+    display: block; /* canvas特有の隙間対策 */
+}
+
+.next-blocks-container {
+    min-width: 150px; /* 次のブロックエリアの最小幅 */
+    padding: 10px;
+    border: 1px solid #eee;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+}
+
+#nextBlocks {
+    display: flex;
+    flex-direction: column; /* ブロックを縦に並べる */
+    gap: 10px; /* ブロック間の隙間 */
+    align-items: center; /* 中央揃え */
+    min-height: 50px; /* 最小の高さ */
+}
+
+.block-preview {
+    border: 1px solid #ddd;
+    cursor: grab;
+}
+
+footer {
+    margin-top: 20px;
+}
+
+#resetButton {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+#resetButton:hover {
+    background-color: #0056b3;
+}
+
+.hidden {
+    display: none;
+}
+
+#gameOverMessage {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}

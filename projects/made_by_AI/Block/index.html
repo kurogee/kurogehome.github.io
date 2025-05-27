@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ブロックパズルゲーム</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ブロックパズル</h1>
+            <div class="score-container">
+                スコア: <span id="score">0</span>
+            </div>
+        </header>
+
+        <main>
+            <div class="game-board-container">
+                <!-- canvasのサイズを300x300から400x400に変更 -->
+                <canvas id="gameBoard" width="400" height="400"></canvas>
+            </div>
+
+            <div class="next-blocks-container">
+                <h2>次のブロック</h2>
+                <div id="nextBlocks">
+                    <!-- ここに次のブロックがJSによって動的に表示されます -->
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <button id="resetButton">リセット</button>
+            <p id="gameOverMessage" class="hidden">ゲームオーバー！</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
