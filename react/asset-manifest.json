@@ -1,16 +1,23 @@
 {
   "files": {
     "main.css": "/react/static/css/main.dfbedfe1.css",
-    "main.js": "/react/static/js/main.12439261.js",
+    "main.js": "/react/static/js/main.b3e6e454.js",
     "static/js/510.eef4d7d9.chunk.js": "/react/static/js/510.eef4d7d9.chunk.js",
     "static/media/MPLUS1Code-VariableFont_wght.ttf": "/react/static/media/MPLUS1Code-VariableFont_wght.31908265fa93ed1c41c7.ttf",
+    "static/media/artificial-intelligence.jpg": "/react/static/media/artificial-intelligence.9fa0fc21867ecd0f011d.jpg",
+    "static/media/tenryukyo_top.webp": "/react/static/media/tenryukyo_top.2e34f1bc11d9f78d4300.webp",
+    "static/media/tenryukyo_station.webp": "/react/static/media/tenryukyo_station.e3b84f07d51d3927bce4.webp",
+    "static/media/tenryu_river.webp": "/react/static/media/tenryu_river.2b7b88a675421287cd39.webp",
+    "static/media/inaji_seat.webp": "/react/static/media/inaji_seat.1e21584471c6c7824711.webp",
+    "static/media/tenryukyo_station2.webp": "/react/static/media/tenryukyo_station2.a61ec88a406fcbf5e7f0.webp",
+    "static/media/inaji.webp": "/react/static/media/inaji.14477ccd8ea55320d8dd.webp",
     "index.html": "/react/index.html",
     "main.dfbedfe1.css.map": "/react/static/css/main.dfbedfe1.css.map",
-    "main.12439261.js.map": "/react/static/js/main.12439261.js.map",
+    "main.b3e6e454.js.map": "/react/static/js/main.b3e6e454.js.map",
     "510.eef4d7d9.chunk.js.map": "/react/static/js/510.eef4d7d9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.dfbedfe1.css",
-    "static/js/main.12439261.js"
+    "static/js/main.b3e6e454.js"
   ]
 }
