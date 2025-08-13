@@ -4,7 +4,7 @@ const CACHE = 'tofu-v1';
 self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(CACHE).then(c => c.addAll([
-      '/', '/index.html', '/styles.css'
+      '/game/', '/game/index.html', '/game/styles.css'
     ]))
   );
   self.skipWaiting();
