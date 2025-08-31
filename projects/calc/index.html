@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#1a1a1a">
+    <title>デジタル計算尺</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <h1>デジタル計算尺</h1>
+            <div class="controls">
+                <button id="resetBtn" class="btn">リセット</button>
+                <button id="settingsBtn" class="btn">設定</button>
+                <div class="zoom-controls">
+                    <button id="zoomOut" class="btn zoom-btn">-</button>
+                    <span id="zoomLevel">100%</span>
+                    <button id="zoomIn" class="btn zoom-btn">+</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="slide-rule-container" id="slideRuleContainer">
+                <div class="ruler-frame">
+                    <!-- A尺 (上部固定) -->
+                    <div class="scale-container" data-scale="A">
+                        <div class="scale-label">A</div>
+                        <div class="scale" id="scaleA">
+                            <canvas class="scale-canvas" width="1600" height="60"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- B尺 (可動) -->
+                    <div class="scale-container movable" data-scale="B">
+                        <div class="scale-label">B</div>
+                        <div class="scale movable-scale" id="scaleB">
+                            <canvas class="scale-canvas" width="1600" height="60"></canvas>
+                            <div class="drag-handle">≡</div>
+                        </div>
+                    </div>
+
+                    <!-- C尺 (可動) -->
+                    <div class="scale-container movable" data-scale="C">
+                        <div class="scale-label">C</div>
+                        <div class="scale movable-scale" id="scaleC">
+                            <canvas class="scale-canvas" width="1600" height="60"></canvas>
+                            <div class="drag-handle">≡</div>
+                        </div>
+                    </div>
+
+                    <!-- D尺 (下部固定) -->
+                    <div class="scale-container" data-scale="D">
+                        <div class="scale-label">D</div>
+                        <div class="scale" id="scaleD">
+                            <canvas class="scale-canvas" width="1600" height="60"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- K尺 (立方根) -->
+                    <div class="scale-container movable" data-scale="K" style="display: none;">
+                        <div class="scale-label">K</div>
+                        <div class="scale movable-scale" id="scaleK">
+                            <canvas class="scale-canvas" width="1600" height="60"></canvas>
+                            <div class="drag-handle">≡</div>
+                        </div>
+                    </div>
+
+                    <!-- L尺 (対数) -->
+                    <div class="scale-container movable" data-scale="L" style="display: none;">
+                        <div class="scale-label">L</div>
+                        <div class="scale movable-scale" id="scaleL">
+                            <canvas class="scale-canvas" width="1600" height="60"></canvas>
+                            <div class="drag-handle">≡</div>
+                        </div>
+                    </div>
+
+                    <!-- S尺 (正弦) -->
+                    <div class="scale-container movable" data-scale="S" style="display: none;">
+                        <div class="scale-label">S</div>
+                        <div class="scale movable-scale" id="scaleS">
+                            <canvas class="scale-canvas" width="1600" height="60"></canvas>
+                            <div class="drag-handle">≡</div>
+                        </div>
+                    </div>
+
+                    <!-- T尺 (正接) -->
+                    <div class="scale-container movable" data-scale="T" style="display: none;">
+                        <div class="scale-label">T</div>
+                        <div class="scale movable-scale" id="scaleT">
+                            <canvas class="scale-canvas" width="1600" height="60"></canvas>
+                            <div class="drag-handle">≡</div>
+                        </div>
+                    </div>
+
+                    <!-- CI尺 (逆数) -->
+                    <div class="scale-container movable" data-scale="CI" style="display: none;">
+                        <div class="scale-label">CI</div>
+                        <div class="scale movable-scale" id="scaleCI">
+                            <canvas class="scale-canvas" width="1600" height="60"></canvas>
+                            <div class="drag-handle">≡</div>
+                        </div>
+                    </div>
+
+                    <!-- LL尺 (指数) -->
+                    <div class="scale-container movable" data-scale="LL1" style="display: none;">
+                        <div class="scale-label">LL1</div>
+                        <div class="scale movable-scale" id="scaleLL1">
+                            <canvas class="scale-canvas" width="1600" height="60"></canvas>
+                            <div class="drag-handle">≡</div>
+                        </div>
+                    </div>
+
+                    <div class="scale-container movable" data-scale="LL2" style="display: none;">
+                        <div class="scale-label">LL2</div>
+                        <div class="scale movable-scale" id="scaleLL2">
+                            <canvas class="scale-canvas" width="1600" height="60"></canvas>
+                            <div class="drag-handle">≡</div>
+                        </div>
+                    </div>
+
+                    <div class="scale-container movable" data-scale="LL3" style="display: none;">
+                        <div class="scale-label">LL3</div>
+                        <div class="scale movable-scale" id="scaleLL3">
+                            <canvas class="scale-canvas" width="1600" height="60"></canvas>
+                            <div class="drag-handle">≡</div>
+                        </div>
+                    </div>
+
+                    <!-- カーソル -->
+                    <div class="cursor" id="cursor">
+                        <div class="cursor-line"></div>
+                        <div class="cursor-handle">⟷</div>
+                    </div>
+                </div>
+
+                <!-- 読み取り表示 -->
+                <div class="reading-display">
+                    <div class="reading-item">
+                        <span class="reading-label">A尺:</span>
+                        <span id="readingA" class="reading-value">1.00</span>
+                    </div>
+                    <div class="reading-item">
+                        <span class="reading-label">B尺:</span>
+                        <span id="readingB" class="reading-value">1.00</span>
+                    </div>
+                    <div class="reading-item">
+                        <span class="reading-label">C尺:</span>
+                        <span id="readingC" class="reading-value">1.00</span>
+                    </div>
+                    <div class="reading-item">
+                        <span class="reading-label">D尺:</span>
+                        <span id="readingD" class="reading-value">1.00</span>
+                    </div>
+                    <div class="reading-item" style="display: none;" data-reading="K">
+                        <span class="reading-label">K尺:</span>
+                        <span id="readingK" class="reading-value">1.00</span>
+                    </div>
+                    <div class="reading-item" style="display: none;" data-reading="L">
+                        <span class="reading-label">L尺:</span>
+                        <span id="readingL" class="reading-value">1.00</span>
+                    </div>
+                    <div class="reading-item" style="display: none;" data-reading="S">
+                        <span class="reading-label">S尺:</span>
+                        <span id="readingS" class="reading-value">1.00</span>
+                    </div>
+                    <div class="reading-item" style="display: none;" data-reading="T">
+                        <span class="reading-label">T尺:</span>
+                        <span id="readingT" class="reading-value">1.00</span>
+                    </div>
+                    <div class="reading-item" style="display: none;" data-reading="CI">
+                        <span class="reading-label">CI尺:</span>
+                        <span id="readingCI" class="reading-value">1.00</span>
+                    </div>
+                    <div class="reading-item" style="display: none;" data-reading="LL1">
+                        <span class="reading-label">LL1尺:</span>
+                        <span id="readingLL1" class="reading-value">1.00</span>
+                    </div>
+                    <div class="reading-item" style="display: none;" data-reading="LL2">
+                        <span class="reading-label">LL2尺:</span>
+                        <span id="readingLL2" class="reading-value">1.00</span>
+                    </div>
+                    <div class="reading-item" style="display: none;" data-reading="LL3">
+                        <span class="reading-label">LL3尺:</span>
+                        <span id="readingLL3" class="reading-value">1.00</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 設定パネル -->
+        <div class="settings-panel" id="settingsPanel">
+            <div class="settings-content">
+                <h3>設定</h3>
+                <div class="setting-group">
+                    <label>表示する目盛り:</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" id="toggleA" checked> A尺 (x²)</label>
+                        <label><input type="checkbox" id="toggleB" checked> B尺 (x²)</label>
+                        <label><input type="checkbox" id="toggleC" checked> C尺 (x)</label>
+                        <label><input type="checkbox" id="toggleD" checked> D尺 (x)</label>
+                        <label><input type="checkbox" id="toggleK"> K尺 (x³)</label>
+                        <label><input type="checkbox" id="toggleL"> L尺 (log x)</label>
+                        <label><input type="checkbox" id="toggleS"> S尺 (sin x)</label>
+                        <label><input type="checkbox" id="toggleT"> T尺 (tan x)</label>
+                        <label><input type="checkbox" id="toggleCI"> CI尺 (1/x)</label>
+                        <label><input type="checkbox" id="toggleLL1"> LL1尺 (e^(x/100))</label>
+                        <label><input type="checkbox" id="toggleLL2"> LL2尺 (e^(x/10))</label>
+                        <label><input type="checkbox" id="toggleLL3"> LL3尺 (e^x)</label>
+                    </div>
+                </div>
+                <div class="setting-group">
+                    <label for="precisionSlider">表示精度:</label>
+                    <input type="range" id="precisionSlider" min="1" max="4" value="2">
+                    <span id="precisionValue">小数点以下2桁</span>
+                </div>
+                <div class="setting-group">
+                    <label for="themeSelect">テーマ:</label>
+                    <select id="themeSelect">
+                        <option value="dark">ダーク</option>
+                        <option value="light">ライト</option>
+                        <option value="blue">ブルー</option>
+                    </select>
+                </div>
+                <button id="closeSettings" class="btn">閉じる</button>
+            </div>
+        </div>
+
+        <!-- 計算結果表示 -->
+        <div class="calculation-display">
+            <div class="calc-item">
+                <span class="calc-label">乗算:</span>
+                <span id="multiplicationResult" class="calc-value">-</span>
+            </div>
+            <div class="calc-item">
+                <span class="calc-label">除算:</span>
+                <span id="divisionResult" class="calc-value">-</span>
+            </div>
+            <div class="calc-item">
+                <span class="calc-label">平方:</span>
+                <span id="squareResult" class="calc-value">-</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
