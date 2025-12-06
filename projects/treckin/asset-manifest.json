@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/projects/treckin/static/css/main.4ad13ad6.css",
-    "main.js": "/projects/treckin/static/js/main.3e262a87.js",
+    "main.css": "/projects/treckin/static/css/main.c0a01048.css",
+    "main.js": "/projects/treckin/static/js/main.edd389d0.js",
     "static/js/453.52ae4623.chunk.js": "/projects/treckin/static/js/453.52ae4623.chunk.js",
     "static/media/N02-22_Station.geojson": "/projects/treckin/static/media/N02-22_Station.cec671c5d414b2792e01.geojson",
     "index.html": "/projects/treckin/index.html",
-    "main.4ad13ad6.css.map": "/projects/treckin/static/css/main.4ad13ad6.css.map",
-    "main.3e262a87.js.map": "/projects/treckin/static/js/main.3e262a87.js.map",
+    "main.c0a01048.css.map": "/projects/treckin/static/css/main.c0a01048.css.map",
+    "main.edd389d0.js.map": "/projects/treckin/static/js/main.edd389d0.js.map",
     "453.52ae4623.chunk.js.map": "/projects/treckin/static/js/453.52ae4623.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4ad13ad6.css",
-    "static/js/main.3e262a87.js"
+    "static/css/main.c0a01048.css",
+    "static/js/main.edd389d0.js"
   ]
 }
