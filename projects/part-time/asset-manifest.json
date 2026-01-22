@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/projects/part-time/static/css/main.54e90a59.css",
+    "main.js": "/projects/part-time/static/js/main.b639f07c.js",
+    "static/js/453.cfab6275.chunk.js": "/projects/part-time/static/js/453.cfab6275.chunk.js",
+    "static/media/ZenMaruGothic-Regular.ttf": "/projects/part-time/static/media/ZenMaruGothic-Regular.95acde3e43471e30380d.ttf",
+    "static/media/ZenMaruGothic-Medium.ttf": "/projects/part-time/static/media/ZenMaruGothic-Medium.235602fb11530095a756.ttf",
+    "index.html": "/projects/part-time/index.html",
+    "main.54e90a59.css.map": "/projects/part-time/static/css/main.54e90a59.css.map",
+    "main.b639f07c.js.map": "/projects/part-time/static/js/main.b639f07c.js.map",
+    "453.cfab6275.chunk.js.map": "/projects/part-time/static/js/453.cfab6275.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.54e90a59.css",
+    "static/js/main.b639f07c.js"
+  ]
+}
