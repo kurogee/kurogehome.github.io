@@ -152,15 +152,15 @@ const RESOURCES = {"assets/AppPartsIcons/alarm-clock-svgrepo-com.svg": "7f24fdb6
 "canvaskit/skwasm_heavy.wasm": "b0be7910760d205ea4e011458df6ee01",
 "favicon.png": "65f70b5eb06146a0b1dfe6438d6470b2",
 "flutter.js": "24bc71911b75b5f8135c949e27a2984e",
-"flutter_bootstrap.js": "cf0ec5ea3f30cc6da5272ee7a0edbc7d",
+"flutter_bootstrap.js": "1482eaa377970627f2c43564e0007140",
 "icons/Icon-192.png": "dd65bef927f0b04fc877b6ac1991ad49",
 "icons/Icon-512.png": "353268d8d81ba1606af63745b8a7f6ee",
 "icons/Icon-maskable-192.png": "dd65bef927f0b04fc877b6ac1991ad49",
 "icons/Icon-maskable-512.png": "353268d8d81ba1606af63745b8a7f6ee",
-"index.html": "1ed55bffd02b91b94738643da2a13d8a",
-"/": "1ed55bffd02b91b94738643da2a13d8a",
-"main.dart.js": "87d3cc86d30bb2dbbcb0cd1916ff1e5d",
-"manifest.json": "09b1151de0ad26337db8061f29065b94",
+"index.html": "e8441061fcd8d201bbee044edb3f184c",
+"/": "e8441061fcd8d201bbee044edb3f184c",
+"main.dart.js": "f1e27fd4a99bec2b9349f03809ff78c5",
+"manifest.json": "cdc4f4b9a0bc112f760d88f250edb2c9",
 "version.json": "5d7b19ca0c61286c7a78b7cd1a8bce6e"};
 // The application shell files that are downloaded before a service worker can
 // start.
