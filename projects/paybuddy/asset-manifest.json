@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/projects/paybuddy/static/css/main.09a5cf52.css",
-    "main.js": "/projects/paybuddy/static/js/main.5740bf86.js",
-    "static/js/453.b80dc028.chunk.js": "/projects/paybuddy/static/js/453.b80dc028.chunk.js",
+    "main.css": "/projects/paybuddy/static/css/main.1c3caa11.css",
+    "main.js": "/projects/paybuddy/static/js/main.c9f078c5.js",
+    "static/js/453.446c7d81.chunk.js": "/projects/paybuddy/static/js/453.446c7d81.chunk.js",
     "index.html": "/projects/paybuddy/index.html",
-    "main.09a5cf52.css.map": "/projects/paybuddy/static/css/main.09a5cf52.css.map",
-    "main.5740bf86.js.map": "/projects/paybuddy/static/js/main.5740bf86.js.map",
-    "453.b80dc028.chunk.js.map": "/projects/paybuddy/static/js/453.b80dc028.chunk.js.map"
+    "main.1c3caa11.css.map": "/projects/paybuddy/static/css/main.1c3caa11.css.map",
+    "main.c9f078c5.js.map": "/projects/paybuddy/static/js/main.c9f078c5.js.map",
+    "453.446c7d81.chunk.js.map": "/projects/paybuddy/static/js/453.446c7d81.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.09a5cf52.css",
-    "static/js/main.5740bf86.js"
+    "static/css/main.1c3caa11.css",
+    "static/js/main.c9f078c5.js"
   ]
 }
